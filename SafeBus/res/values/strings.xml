@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SafeBus</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="paginas_instrucciones_titulo">Bienvenido a\t </string>
+    <string name="paginas_instrucciones_texto_pag_1">Recuerda, si en algún momento te sientes inseguro o agredido, puedes apretar el botón de encendido cinco veces y se mandará una notificación al chofer y a un contacto que elegirás a continuación</string>
+    <string name="paginas_instrucciones_texto_pag_2_1">Da click en el botón “+” para agregar un contacto para notificaciones.</string>
+    <string name="paginas_instrucciones_texto_pag_2_2">Si no quieres agregarlo, da click en Terminar.</string>
+    <string name="paginas_instrucciones_texto_pag_2_3">Recuerda, siempre puedes ir a las configuraciones y agregar un contacto después. </string>
+    <string name="problemas_titulo">¿Quién está teniendo problemas?</string>
+    <string name="notificar_chofer_familia">Gracias por reportar, hemos mandado una notificación al chofer y a tu contacto de seguridad.</string>
+    <string name="notificar_chofer">Gracias por reportar, hemos mandado una notificación al chofer.</string>
+    <string name="notificar_acceso_wifi">Para acceder al WiFi, da like al grupo de SafeBus y te mandaremos la contraseña</string>
+    <string name="gracias_por_compartir">Gracias. 
+En ese grupo podrás compartir mejor tu perspectiva sobre esta campaña y el servicio que se está dando en la línea de autobús. 
+Para obtener la contraseña la próxima vez que hagas un viaje, te pediremos que califiques tu viaje una vez que bajes del autobús. </string>
+    <string name="gracias_por_realimentacion">Gracias por dar retroalimentación en tu viaje anterior. En un momento enviaremos la contraseña del WiFi. </string>
+    <string name="safebus_menu_encuentra">Encuentra</string>
+    <string name="safebus_menu_reporta">Reporta</string>
+    <string name="safebus_menu_conecta">Conecta</string>
+    <string name="registro_titulo">Contacto de emergencia</string>
+    <string name="registro_btn_guardar">Guardar</string>
+    <string name="title_activity_contacto">ContactoActivity</string>
+     <string name="registro_et_telefono">Teléfono</string>
+    <string name="registro_et_correo">Correo</string>
+    <string name="registro_selecciona_uno">Selecciona uno</string>
+
+</resources>

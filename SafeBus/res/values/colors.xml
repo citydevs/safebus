@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="android_blue">#FF33b5e5</color>
+    <color name="android_darkblue">#FF0099cc</color>
+    <color name="android_green">#14CC54</color>
+    <color name="android_darkgreen">#FF669900</color>
+    <color name="android_red">#FFff4444</color>
+    <color name="android_darkred">#FFcc0000</color>
+    <color name="android_yellow">#FFffd75a</color>
+    <color name="android_darkyellow">#FFffc40d</color>
+    <color name="android_orange">#FFffbb33</color>
+    <color name="android_darkorange">#FFff8800</color>
+    <color name="android_pink">#FFd9698c</color>
+    <color name="android_darkpink">#FFc3325f</color>
+    <color name="android_purple">#FFaa66cc</color>
+    <color name="android_darkpurple">#FF9933cc</color>
+    <color name="gris_obscuro_trans">#cc000000</color>
+    <color name="azul_facebook">#3b5998</color>
+    <color name="android_trans">#00000000</color>
+
+    <!-- colores del paginador -->
+    <color name="vpi__background_holo_dark">#ff000000</color>
+    <color name="vpi__background_holo_light">#fff3f3f3</color>
+    <color name="vpi__bright_foreground_holo_dark">@color/vpi__background_holo_light</color>
+    <color name="vpi__bright_foreground_holo_light">@color/vpi__background_holo_dark</color>
+    <color name="vpi__bright_foreground_disabled_holo_dark">#ff4c4c4c</color>
+    <color name="vpi__bright_foreground_disabled_holo_light">#ffb2b2b2</color>
+    <color name="vpi__bright_foreground_inverse_holo_dark">@color/vpi__bright_foreground_holo_light</color>
+    <color name="vpi__bright_foreground_inverse_holo_light">@color/vpi__bright_foreground_holo_dark</color>
+
+    
+     <color name="color_vivos">#000000</color>
+    <color name="color_fondos">#FCE796</color>
+  
+
+</resources>
