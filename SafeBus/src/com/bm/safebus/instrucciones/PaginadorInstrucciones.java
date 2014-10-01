@@ -9,13 +9,14 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 
+import com.bm.safebus.R;
+import com.bm.safebus.SafeBusMainActivity;
 import com.bm.safebus.instrucciones.adaptadores.FragmentPagerAdapterDialog;
 import com.bm.safebus.instrucciones.adaptadores.ScreenSlidePageFragmentDialog;
 import com.bm.safebus.instrucciones.paginas.PaginaDosGuia;
 import com.bm.safebus.instrucciones.paginas.PaginaDosGuia.OnListenerMas;
 import com.bm.safebus.registro.ContactoActivity;
-import com.bm.savebus.R;
-import com.bm.savebus.SafeBusMainActivity;
+import com.bm.savebus.utilerias.Utils;
 
 
 
@@ -58,7 +59,10 @@ public class PaginadorInstrucciones extends FragmentActivity  implements OnListe
 				if(PaginadorInstrucciones.this.pager.getCurrentItem()==0){
 					PaginadorInstrucciones.this.pager.setCurrentItem(1);
 				}else{
+					
+					new Utils(PaginadorInstrucciones.this).setPreferenciasSplash();
 					startActivity(new Intent(PaginadorInstrucciones.this,SafeBusMainActivity.class));
+					finish();
 				}
 				
 			}

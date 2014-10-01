@@ -19,11 +19,18 @@ Para obtener la contraseña la próxima vez que hagas un viaje, te pediremos que
     <string name="safebus_menu_encuentra">Encuentra</string>
     <string name="safebus_menu_reporta">Reporta</string>
     <string name="safebus_menu_conecta">Conecta</string>
+
+    <!-- Registro -->
     <string name="registro_titulo">Contacto de emergencia</string>
     <string name="registro_btn_guardar">Guardar</string>
     <string name="title_activity_contacto">ContactoActivity</string>
-     <string name="registro_et_telefono">Teléfono</string>
+    <string name="registro_et_telefono">Teléfono</string>
     <string name="registro_et_correo">Correo</string>
     <string name="registro_selecciona_uno">Selecciona uno</string>
+    <string name="registro_telefono_vacio">Debes llenar el teléfono correctamente</string>
+    <string name="registro_correo_vacio">Debes llenar el correo correctamente</string>
+    <string name="registro_telefono_largo">El teléfono debe ser de 10 digitos</string>
+    <string name="registro_telefono_incorrecto">El teléfono debe ser sólo de números</string>
+    <string name="registro_correo_incorrecto">El correo esta mal escrito</string>
 
 </resources>

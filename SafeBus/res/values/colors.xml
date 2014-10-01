@@ -32,6 +32,7 @@
     
      <color name="color_vivos">#000000</color>
     <color name="color_fondos">#FCE796</color>
+    <color name="color_blanco">#ffffff</color>
   
 
 </resources>

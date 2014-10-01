@@ -9,8 +9,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 
-import com.bm.savebus.R;
+import com.bm.safebus.R;
+import com.bm.safebus.dialogos.Mensajes;
+import com.bm.savebus.utilerias.Utils;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -18,7 +21,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.mikesaurio.mensajesydialogos.Mensajes;
 import com.mikesaurio.modulolocalizacion.ServicioLocalizacion;
 
 /**
@@ -42,6 +44,11 @@ public class MapaTrackingActivity extends Activity {
 		//iniciamos el servicio de localizacion
 		ServicioLocalizacion.activity = MapaTrackingActivity.this;
 		startService(new Intent(MapaTrackingActivity.this,ServicioLocalizacion.class));
+		
+		
+		String url= "http://cryptic-peak-2139.herokuapp.com/buses.json";
+		String strigJson = new  Utils(MapaTrackingActivity.this).doHttpConnection(url);
+		
 		 	
 	}
 	
@@ -155,6 +162,7 @@ public class MapaTrackingActivity extends Activity {
 		if(pDialog!=null){
 	    	pDialog.dismiss();
 	    	}
+		stopService(new Intent(MapaTrackingActivity.this,ServicioLocalizacion.class));
 			super.onDestroy();
 		}
 	

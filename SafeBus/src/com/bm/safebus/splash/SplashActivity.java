@@ -9,8 +9,10 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Window;
 
+import com.bm.safebus.R;
+import com.bm.safebus.SafeBusMainActivity;
 import com.bm.safebus.instrucciones.PaginadorInstrucciones;
-import com.bm.savebus.R;
+import com.bm.savebus.utilerias.Utils;
 
 public class SplashActivity extends Activity {
 
@@ -23,7 +25,13 @@ public class SplashActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);   
         setContentView(R.layout.activity_splash);
         
-        init(PaginadorInstrucciones.class);
+        if(new Utils(SplashActivity.this).getPreferenciasSplash()){
+        	init(SafeBusMainActivity.class);
+    	}else{
+    		init(PaginadorInstrucciones.class);
+           
+    	}
+        
         
     }
     
@@ -33,8 +41,7 @@ public class SplashActivity extends Activity {
 	    	TimerTask task = new TimerTask() {
 	            @Override
 	            public void run() {
-	            	Intent mainIntent = new Intent().setClass(SplashActivity.this, clase);
-	                startActivity(mainIntent);
+	                startActivity(new Intent().setClass(SplashActivity.this, clase));
 	                finish();
 	            }
 	        };

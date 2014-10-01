@@ -6,10 +6,8 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 
-import com.bm.savebus.R;
+import com.bm.safebus.R;
 
 /**
  * pagina que muestra en una lista los adeudos de un carro con las secretarias

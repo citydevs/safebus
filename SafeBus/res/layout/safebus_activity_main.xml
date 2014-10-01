@@ -2,15 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@color/color_fondos" >
 
-    <TextView
+    <ImageView
         android:id="@+id/textView4"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:layout_gravity="center"
         android:layout_weight=".1"
         android:gravity="center"
-        android:text="@string/app_name" />
+        android:src="@drawable/saefubus_safebus" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,17 +21,14 @@
         android:gravity="center"
         android:orientation="vertical" >
 
-        <ImageButton
+        <Button
             android:id="@+id/safebus_btn_encuentra"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_launcher" />
+            android:layout_margin="10dp"
+            android:background="@drawable/boton_encuentra_selector"
+            android:src="@drawable/saefubus_encuentraverde" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/safebus_menu_encuentra" />
     </LinearLayout>
 
     <LinearLayout
@@ -39,17 +38,14 @@
         android:gravity="center"
         android:orientation="vertical" >
 
-        <ImageButton
+        <Button
             android:id="@+id/safebus_btn_reporta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_launcher" />
+            android:layout_margin="10dp"
+            android:background="@drawable/boton_reporta_selector"
+            android:src="@drawable/saefubus_reportaverde" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/safebus_menu_reporta" />
     </LinearLayout>
 
     <LinearLayout
@@ -59,17 +55,14 @@
         android:gravity="center"
         android:orientation="vertical" >
 
-        <ImageButton
+        <Button
             android:id="@+id/safebus_btn_conecta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/ic_launcher" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/safebus_menu_conecta" />
+            android:background="@drawable/boton_conecta_selector"
+            android:layout_margin="10dp"
+            android:src="@drawable/saefubus_conectaverde" />
     </LinearLayout>
 
 </LinearLayout>

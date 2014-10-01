@@ -9,9 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bm.safebus.R;
 import com.bm.safebus.instrucciones.paginas.PaginaDosGuia;
 import com.bm.safebus.instrucciones.paginas.PaginaUnoGuia;
-import com.bm.savebus.R;
 
 /**
  * 

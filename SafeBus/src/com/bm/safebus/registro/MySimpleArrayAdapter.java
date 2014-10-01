@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.bm.savebus.R;
+import com.bm.safebus.R;
 
 public class MySimpleArrayAdapter extends ArrayAdapter<String> {
   private final Context context;
