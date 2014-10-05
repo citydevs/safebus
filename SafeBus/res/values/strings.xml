@@ -6,7 +6,7 @@
     <string name="paginas_instrucciones_titulo">Bienvenido a\t </string>
     <string name="paginas_instrucciones_texto_pag_1">Recuerda, si en algún momento te sientes inseguro o agredido, puedes apretar el botón de encendido cinco veces y se mandará una notificación al chofer y a un contacto que elegirás a continuación</string>
     <string name="paginas_instrucciones_texto_pag_2_1">Da click en el botón “+” para agregar un contacto para notificaciones.</string>
-    <string name="paginas_instrucciones_texto_pag_2_2">Si no quieres agregarlo, da click en Terminar.</string>
+    <string name="paginas_instrucciones_texto_pag_2_2">Si no quieres agregarlo, da click en Siguiente.</string>
     <string name="paginas_instrucciones_texto_pag_2_3">Recuerda, siempre puedes ir a las configuraciones y agregar un contacto después. </string>
     <string name="problemas_titulo">¿Quién está teniendo problemas?</string>
     <string name="notificar_chofer_familia">Gracias por reportar, hemos mandado una notificación al chofer y a tu contacto de seguridad.</string>

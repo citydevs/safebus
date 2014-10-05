@@ -3,15 +3,19 @@ package com.bm.safebus;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
-import com.bm.safebus.dialogos.Mensajes;
 import com.bm.safebus.mapa.MapaTrackingActivity;
 import com.bm.savebus.utilerias.Utils;
+import com.mikesaurio.mensajesydialogos.Mensajes;
 
 /**
  * 
@@ -32,13 +36,27 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
         
        
 		setContentView(R.layout.safebus_activity_main);
+		
+		
+		Display display = getWindowManager().getDefaultDisplay();
+		Point size = new Point();
+		display.getSize(size);
+		int width = size.x;
+		int height = size.y;
+		
+		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(width / 3,height / 4);
+
+		
 
 		btn_encuentra = (Button) findViewById(R.id.safebus_btn_encuentra);
 		btn_encuentra.setOnClickListener(this);
+		btn_encuentra.setLayoutParams(lp);
 		btn_reporta = (Button) findViewById(R.id.safebus_btn_reporta);
 		btn_reporta.setOnClickListener(this);
+		btn_reporta.setLayoutParams(lp);
 		btn_conecta = (Button) findViewById(R.id.safebus_btn_conecta);
 		btn_conecta.setOnClickListener(this);
+		btn_conecta.setLayoutParams(lp);
 
 	}
 

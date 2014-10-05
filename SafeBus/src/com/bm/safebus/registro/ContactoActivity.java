@@ -18,9 +18,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.bm.safebus.R;
-import com.bm.safebus.dialogos.Mensajes;
 import com.bm.safebus.registro.validador.EditTextValidator;
 import com.bm.savebus.utilerias.Utils;
+import com.mikesaurio.mensajesydialogos.Mensajes;
 
 /**
  * 

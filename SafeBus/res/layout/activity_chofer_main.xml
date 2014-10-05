@@ -13,6 +13,15 @@
         class="com.google.android.gms.maps.MapFragment"
         map:cameraTargetLat="19.432727"
         map:cameraTargetLng="-99.133179"
-        map:cameraZoom="18" />
+        map:cameraZoom="16" />
+
+    <ImageView
+        android:id="@+id/mapa_iv_back"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/saefubus_back" />
 
 </RelativeLayout>

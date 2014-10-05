@@ -8,7 +8,7 @@ import android.view.KeyEvent;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.bm.safebus.dialogos.Mensajes;
+import com.mikesaurio.mensajesydialogos.Mensajes;
 
 public class EditTextBackEvent extends EditText {
 

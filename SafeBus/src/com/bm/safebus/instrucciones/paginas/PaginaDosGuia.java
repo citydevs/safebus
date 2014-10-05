@@ -3,10 +3,14 @@ package com.bm.safebus.instrucciones.paginas;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Point;
 import android.util.AttributeSet;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.bm.safebus.R;
 
@@ -49,10 +53,18 @@ public class PaginaDosGuia extends View {
 	 * init de la pagina
 	 */
 	public void init() {
-
+		Display display = context.getWindowManager().getDefaultDisplay();
+		Point size = new Point();
+		display.getSize(size);
+		int width = size.x;
+		int height = size.y;
 
 		LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		view = inflater.inflate(R.layout.instrucciones_pag_dos, null);
+		
+		
+		
+		
 		ImageView instrucciones_iv_mas= (ImageView)view.findViewById(R.id.instrucciones_iv_mas);
 		instrucciones_iv_mas.setOnClickListener(new View.OnClickListener() {
 			

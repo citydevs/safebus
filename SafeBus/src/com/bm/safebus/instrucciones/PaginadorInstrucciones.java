@@ -2,12 +2,15 @@ package com.bm.safebus.instrucciones;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.Display;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.bm.safebus.R;
 import com.bm.safebus.SafeBusMainActivity;
@@ -36,6 +39,12 @@ public class PaginadorInstrucciones extends FragmentActivity  implements OnListe
 	     requestWindowFeature(Window.FEATURE_NO_TITLE);  
 		this.setContentView(R.layout.paginador_activity);
 
+		Display display = getWindowManager().getDefaultDisplay();
+		Point size = new Point();
+		display.getSize(size);
+		int width = size.x;
+		int height = size.y;
+		
 		
 		pager = (ViewPager)findViewById(R.id.pager_dialog);
 		pager.setOffscreenPageLimit(4);
@@ -52,6 +61,9 @@ public class PaginadorInstrucciones extends FragmentActivity  implements OnListe
 		PaginadorInstrucciones.this.pager.setAdapter(adapter);
 		
 		ImageView btn_siguiente =(ImageView)findViewById(R.id.instrucciones_btn_siguiente);
+		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(width / 2,height / 3);
+		btn_siguiente.setLayoutParams(lp);
+		
 		btn_siguiente.setOnClickListener(new View.OnClickListener() {
 			
 			@Override

@@ -5,7 +5,7 @@ import com.google.android.gms.maps.model.LatLng;
 public class MapaBean {
 	private LatLng punto;
 	private String placa;
-	private int ruta_id;
+	private String ruta_id;
 	private int bus_id;
 	
 	public LatLng getPunto() {
@@ -20,11 +20,11 @@ public class MapaBean {
 	public void setPlaca(String placa) {
 		this.placa = placa;
 	}
-	public int getRuta_id() {
+	public String getRuta_id() {
 		return ruta_id;
 	}
-	public void setRuta_id(int ruta_id) {
-		this.ruta_id = ruta_id;
+	public void setRuta_id(String id) {
+		this.ruta_id = id;
 	}
 	public int getBus_id() {
 		return bus_id;
