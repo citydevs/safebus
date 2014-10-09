@@ -7,8 +7,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_gravity="center"
+        android:layout_weight="1"
         android:orientation="vertical"
         android:padding="25dp" >
 
@@ -24,35 +25,34 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_margin="10dp"
-            android:src="@drawable/saefubus_mas" />
+            android:background="@drawable/boton_mas_selector" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/paginas_instrucciones_texto_pag_2_2" />
+    </LinearLayout>
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp" 
+        android:layout_marginBottom="25dp">
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitStart"
+            android:src="@drawable/ic_launcher_saefubus_banderilla" />
+
+        <TextView
+            android:id="@+id/textView4"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".2"
-            android:paddingTop="10dp" >
-
-            <ImageView
-                android:id="@+id/imageView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_launcher_saefubus_banderilla" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="bottom"
-                android:text="@string/paginas_instrucciones_texto_pag_2_3" />
-        </LinearLayout>
+            android:layout_height="match_parent"
+            android:gravity="center|left"
+            android:text="@string/paginas_instrucciones_texto_pag_2_3" />
     </LinearLayout>
 
 </LinearLayout>

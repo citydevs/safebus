@@ -5,16 +5,23 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
+import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bm.safebus.R;
@@ -33,11 +40,14 @@ public class ContactoActivity extends Activity  {
 	private EditTextBackEvent et_telefono,et_correo;
 	AlertDialog customDialog= null;
 	private Button btn_guardar;
+	private ImageView ImageView_titulo_contacto;
 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+	     requestWindowFeature(Window.FEATURE_NO_TITLE); 
 		setContentView(R.layout.activity_contacto);
 		
 		
@@ -76,7 +86,16 @@ public class ContactoActivity extends Activity  {
 		}
 		
 		
-		getActionBar().setHomeButtonEnabled(true);
+		Display display = getWindowManager().getDefaultDisplay();
+		Point size = new Point();
+		display.getSize(size);
+		int width = size.x;
+		int height = size.y;
+		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,height/10);
+		ImageView_titulo_contacto=(ImageView)findViewById(R.id.ImageView_titulo_contacto);
+		ImageView_titulo_contacto.setLayoutParams(lp);
+		
+	
 
 				
 	}

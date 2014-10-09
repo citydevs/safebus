@@ -1,0 +1,100 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_fondos"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/safebus_tv_problemas_titulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:drawableLeft="@drawable/ic_launcher_logo"
+        android:gravity="center"
+        android:text="@string/problemas_titulo" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@color/color_vivos" />
+
+    <LinearLayout
+        android:id="@+id/safebus_ll_quien"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/safebus_btn_yo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/saefubus_yo"
+                android:src="@drawable/saefubus_yo" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".5"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/safebus_btn_alguien_mas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/saefubus_alguienmas"
+                android:src="@drawable/saefubus_alguienmas" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/safebus_ll_enviando_mensaje"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <ImageView
+            android:id="@+id/enviar_alarma_iv_alarma"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/safebus_ll_reporte_hecho"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone" 
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/enviar_alarma_iv_reporte_usuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" 
+            android:src="@drawable/saefubus_alarmacel"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/enviar_alarma_iv_reporte_chofer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/saefubus_alarmabussmall"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</LinearLayout>

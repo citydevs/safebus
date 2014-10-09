@@ -5,15 +5,14 @@
     android:background="@color/color_fondos"
     android:orientation="vertical" >
 
-    <TextView
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight=".1"
-        android:drawableRight="@drawable/ic_launcher_name"
+        android:src="@drawable/saefubus_safebus"
         android:gravity="center"
-        android:layout_marginLeft="10dp"
-        android:text="@string/paginas_instrucciones_titulo"
-        android:textStyle="bold" />
+        android:layout_margin="10dp"
+        android:padding="10dp"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager_dialog"
@@ -33,7 +32,7 @@
             android:id="@+id/instrucciones_btn_siguiente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/saefubus_siguiente" />
+            android:src="@drawable/boton_siguiente_selector" />
     </LinearLayout>
 
 </LinearLayout>

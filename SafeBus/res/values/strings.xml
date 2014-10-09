@@ -3,7 +3,7 @@
 
     <string name="app_name">SafeBus</string>
     <string name="hello_world">Hello world!</string>
-    <string name="paginas_instrucciones_titulo">Bienvenido a\t </string>
+    <string name="paginas_instrucciones_titulo">Bienvenido</string>
     <string name="paginas_instrucciones_texto_pag_1">Recuerda, si en algún momento te sientes inseguro o agredido, puedes apretar el botón de encendido cinco veces y se mandará una notificación al chofer y a un contacto que elegirás a continuación</string>
     <string name="paginas_instrucciones_texto_pag_2_1">Da click en el botón “+” para agregar un contacto para notificaciones.</string>
     <string name="paginas_instrucciones_texto_pag_2_2">Si no quieres agregarlo, da click en Siguiente.</string>
@@ -32,5 +32,9 @@ Para obtener la contraseña la próxima vez que hagas un viaje, te pediremos que
     <string name="registro_telefono_largo">El teléfono debe ser de 10 digitos</string>
     <string name="registro_telefono_incorrecto">El teléfono debe ser sólo de números</string>
     <string name="registro_correo_incorrecto">El correo esta mal escrito</string>
+    <string name="title_activity_reporte">ReporteActivity</string>
+    <string name="title_activity_enviar_alarma">EnviarAlarmaActivity</string>
+    
+    <string name="alarma_enviando">Enviando alarma.</string>
 
 </resources>

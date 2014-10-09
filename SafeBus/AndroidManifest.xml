@@ -38,7 +38,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name="com.bm.safebus.splash.SplashActivity"
+            android:name=".splash.SplashActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,13 +47,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.bm.safebus.mapa.MapaTrackingActivity"
+            android:name=".mapa.MapaTrackingActivity"
             android:label="@string/app_name" >
         </activity>
-        <activity android:name="com.bm.safebus.instrucciones.PaginadorInstrucciones" >
+        <activity android:name=".instrucciones.PaginadorInstrucciones" >
         </activity>
         <activity
-            android:name="com.bm.safebus.SafeBusMainActivity"
+            android:name=".SafeBusMainActivity"
             android:label="@string/app_name" >
         </activity>
 
@@ -61,9 +61,18 @@
         </service>
 
         <activity
-            android:name="com.bm.safebus.registro.ContactoActivity"
+            android:name=".registro.ContactoActivity"
             android:label=""
             android:windowSoftInputMode="stateAlwaysVisible" >
+        </activity>
+        <activity
+            android:name=".reporte.ReporteActivity"
+            android:label="@string/title_activity_reporte" 
+         >
+        </activity>
+        <activity
+            android:name="com.bm.safebus.alarma.EnviarAlarmaActivity"
+            android:label="@string/title_activity_enviar_alarma" >
         </activity>
     </application>
 
