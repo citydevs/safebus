@@ -43,8 +43,6 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 	public Button btn_reporta;
 	public Button btn_conecta;
 	private AlertDialog customDialog = null;
-	private int height;
-	private int width;
 	private TextView tv_problemas_titulo;
 	private ImageView alarma_iv_alarma;
 	private AnimationDrawable frameAnimation;
@@ -52,6 +50,7 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 	private ImageView iv_reporte_usuario,iv_reporte_chofer;
 	private int aviso_a= 0;
 	private Menu menu;
+	Point p;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,14 +75,10 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 		
 		
 
-		Display display = getWindowManager().getDefaultDisplay();
-		Point size = new Point();
-		display.getSize(size);
-		width = size.x;
-		height = size.y;
+		 p = Utils.getTamanoPantalla(SafeBusMainActivity.this);
 
-		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(width / 3,
-				height / 4);
+		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(p.x / 3,
+				p.y / 4);
 
 		btn_encuentra = (Button) findViewById(R.id.safebus_btn_encuentra);
 		btn_encuentra.setOnClickListener(this);
@@ -156,8 +151,8 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 		builder.setView(view);
 		builder.setCancelable(true);
 
-		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(width / 3,
-				width / 3);
+		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(p.x / 3,
+				p.x / 3);
 
 		Button btn_alguien_mas = (Button) view.findViewById(R.id.safebus_btn_alguien_mas);
 		btn_alguien_mas.setLayoutParams(lp);

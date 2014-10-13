@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_id">1505094703080117</string>
+
+    <string name="app_id">1505094703080117</string>
     <string name="app_name">SafeBus</string>
     <string name="hello_world">Hello world!</string>
     <string name="paginas_instrucciones_titulo">Bienvenido</string>
     <string name="paginas_instrucciones_texto_pag_1">Recuerda, si en algún momento te sientes inseguro o agredido, puedes apretar el botón de encendido cinco veces y se mandará una notificación al chofer y a un contacto que elegirás a continuación</string>
 
+    <!-- Mapa -->
+     <string name="mapa_espera">¡Espera! te estamos localizando</string>
+     <string name="mapa_mi_ubicacion">Mi ubicación</string>
+    
     <!-- Pagina 2 -->
-        <string name="paginas_instrucciones_texto_pag_2_1">Da click en el botón “+” para AGREGAR un contacto para notificaciones.</string>
+    <string name="paginas_instrucciones_texto_pag_2_1">Da click en el botón “+” para AGREGAR un contacto para notificaciones.</string>
     <string name="paginas_instrucciones_texto_pag_2_2">Si no quieres agregarlo, da click en Entiendo.</string>
-        <string name="paginas_instrucciones_texto_pag_2_1_listo">Da click en el botón “+” para EDITAR tu contacto de notificaciones.</string>
+    <string name="paginas_instrucciones_texto_pag_2_1_listo">Da click en el botón “+” para EDITAR tu contacto de notificaciones.</string>
     <string name="paginas_instrucciones_texto_pag_2_2_listo">Para finalizar, da click en Entiendo.</string>
-    
-    
     <string name="paginas_instrucciones_texto_pag_2_3">Recuerda, siempre puedes ir a las configuraciones y agregar o editar tu contacto. </string>
     <string name="problemas_titulo">¿Quién está teniendo problemas?</string>
     <string name="notificar_chofer_familia">Gracias por reportar, hemos mandado una notificación al chofer y a tu contacto de seguridad.</string>
@@ -28,10 +31,9 @@ Para obtener la contraseña la próxima vez que hagas un viaje, te pediremos que
 
     <!-- Registro -->
     <string name="main_agregar_contacto">Agregar Contacto</string>
-     <string name="main_editar_contacto">Editar Contacto</string>
-      <string name="main_menu_acerca_de">Acerca de</string>
-      <string name="main_menu_menu">Menu</string>
-    
+    <string name="main_editar_contacto">Editar Contacto</string>
+    <string name="main_menu_acerca_de">Acerca de</string>
+    <string name="main_menu_menu">Menu</string>
     <string name="registro_titulo">Contacto de emergencia</string>
     <string name="registro_btn_guardar">Guardar</string>
     <string name="title_activity_contacto">ContactoActivity</string>
@@ -45,8 +47,6 @@ Para obtener la contraseña la próxima vez que hagas un viaje, te pediremos que
     <string name="registro_correo_incorrecto">El correo esta mal escrito</string>
     <string name="title_activity_reporte">ReporteActivity</string>
     <string name="title_activity_enviar_alarma">EnviarAlarmaActivity</string>
-    
     <string name="alarma_enviando">Enviando alarma.</string>
-    
 
 </resources>
