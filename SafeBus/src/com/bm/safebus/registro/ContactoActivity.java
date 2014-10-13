@@ -19,12 +19,12 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bm.safebus.R;
+import com.bm.safebus.instrucciones.PaginadorInstrucciones;
 import com.bm.safebus.registro.validador.EditTextValidator;
 import com.bm.savebus.utilerias.Utils;
 import com.mikesaurio.mensajesydialogos.Mensajes;
@@ -63,6 +63,9 @@ public class ContactoActivity extends Activity  {
 					new Utils(ContactoActivity.this).setPreferenciasContacto(
 							new String[]{et_telefono.getText().toString(),et_correo.getText().toString()});
 					Mensajes.simpleToast(ContactoActivity.this, "Contacto guardado", Toast.LENGTH_LONG);
+					Intent returnIntent = new Intent();
+					setResult(PaginadorInstrucciones.CONTACTO_GUARDADO, returnIntent);
+					finish();
 				}
 			}
 		});
@@ -86,12 +89,8 @@ public class ContactoActivity extends Activity  {
 		}
 		
 		
-		Display display = getWindowManager().getDefaultDisplay();
-		Point size = new Point();
-		display.getSize(size);
-		int width = size.x;
-		int height = size.y;
-		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,height/10);
+		
+		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,Utils.getTamanoPantalla(ContactoActivity.this).y/10);
 		ImageView_titulo_contacto=(ImageView)findViewById(R.id.ImageView_titulo_contacto);
 		ImageView_titulo_contacto.setLayoutParams(lp);
 		
@@ -253,25 +252,25 @@ public class ContactoActivity extends Activity  {
 
 	@Override
 	public void onBackPressed() {
-		Mensajes.simpleToast(ContactoActivity.this, "Datos NO guardados", Toast.LENGTH_LONG);
-		finish();
+		String[] info= new Utils(ContactoActivity.this).getPreferenciasContacto();
+		if(info[0]!=null){
+			Mensajes.simpleToast(ContactoActivity.this, "Datos actualizados", Toast.LENGTH_LONG);
+			Intent returnIntent = new Intent();
+			setResult(PaginadorInstrucciones.CONTACTO_GUARDADO, returnIntent);
+			finish();
+				
+		} else {
+			Mensajes.simpleToast(ContactoActivity.this, "Datos NO guardados", Toast.LENGTH_LONG);
+			Intent returnIntent = new Intent();
+			setResult(PaginadorInstrucciones.CONTACTO_NO_GUARDADO, returnIntent);
+			finish();
+		}
+		
+		
 	}
 
 	
-	@Override
-	public boolean onMenuItemSelected(int featureId, MenuItem item) {
-
-	    int itemId = item.getItemId();
-	    switch (itemId) {
-	    case android.R.id.home:
-	    	onBackPressed();
-	        break;
-
-	    }
-
-	    return true;
-	}
-
+	
 	
 	
 	

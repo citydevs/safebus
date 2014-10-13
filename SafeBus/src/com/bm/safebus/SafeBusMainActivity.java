@@ -1,29 +1,38 @@
 package com.bm.safebus;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bm.safebus.facebook.FacebookLoginActivity;
+import com.bm.safebus.instrucciones.PaginadorInstrucciones;
 import com.bm.safebus.mapa.MapaTrackingActivity;
+import com.bm.safebus.registro.ContactoActivity;
 import com.bm.savebus.utilerias.Utils;
 import com.mikesaurio.mensajesydialogos.Mensajes;
 
 /**
+ * Clase principal que contiene las diferentes opciones que se pueden hacer 
  * 
  * @author mikesaurio
  * 
@@ -42,14 +51,30 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 	private LinearLayout ll_quien,ll_enviando_mensaje,ll_reporte_hecho;
 	private ImageView iv_reporte_usuario,iv_reporte_chofer;
 	private int aviso_a= 0;
+	private Menu menu;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
+		
 		setContentView(R.layout.safebus_activity_main);
+		
+		
+		/*ActionBar*/
+		ActionBar mActionBar = getActionBar();
+		mActionBar.setDisplayShowHomeEnabled(false);
+		mActionBar.setDisplayShowTitleEnabled(false);//new ColorDrawable(Color.WHITE)
+		mActionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.marco));
+		LayoutInflater mInflater = LayoutInflater.from(this);
+		View mCustomView = mInflater.inflate(R.layout.action_bar_custome, null);
+		mActionBar.setCustomView(mCustomView);
+		mActionBar.setDisplayShowCustomEnabled(true);
+		/**/
+		
+		
+		
 
 		Display display = getWindowManager().getDefaultDisplay();
 		Point size = new Point();
@@ -93,7 +118,7 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 			break;
 
 		case R.id.safebus_btn_conecta:
-			
+			iniciarActividad(FacebookLoginActivity.class);
 			break;
 		case R.id.safebus_btn_alguien_mas:
 		new MensajeTask().execute(2);
@@ -165,6 +190,12 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 	}
 	
 	
+	
+	/**
+	 * Clase que envia al contacto de emergencia 
+	 * @author mikesaurio
+	 *
+	 */
 	private class MensajeTask extends AsyncTask<Integer, Void, Boolean> {
 	    private long time;
 
@@ -192,6 +223,9 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 	        return null;
 	    }
 
+	    
+	    
+	    
 	    @Override
 	    protected void onPostExecute(Boolean result) {
 	    	frameAnimation.stop();
@@ -212,6 +246,49 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 	       
 	    }
 	}
+
+	
+	@Override
+	  public boolean onCreateOptionsMenu(Menu menu) {
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.menu_main, menu);
+	  this.menu=menu;
+	    return true;
+	  } 
+	
+	
+	
+	
+	
+	@Override
+	protected void onResume() {
+		if(menu!=null){
+		 MenuItem bedMenuItem = menu.findItem(R.id.menuadd);
+		    String[] info= new Utils(SafeBusMainActivity.this).getPreferenciasContacto();
+		  		if(info[0]!=null){
+		  			 bedMenuItem.setTitle(getResources().getString(R.string.main_editar_contacto));
+		  				
+		  		} else {
+		  			 bedMenuItem.setTitle(getResources().getString(R.string.main_agregar_contacto));
+		  		}
+	}
+		super.onResume();
+	}
+
+	@Override
+	  public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	    case R.id.menuadd:
+	    	startActivity(new Intent(SafeBusMainActivity.this,ContactoActivity.class));
+	      return true;
+	    case R.id.menuabouth:
+	    	return true;
+	  
+	    default:
+	    	return false;
+	    }
+	  } 
+	
 	
 
 }

@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.view.Display;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -23,15 +23,18 @@ import com.bm.safebus.registro.ContactoActivity;
 import com.bm.savebus.utilerias.Utils;
 
 
-
-public class PaginadorInstrucciones extends FragmentActivity  implements OnListenerMas {
+/**
+ * Paginador que muestra el instructivo de la app
+ * @author mikesaurio
+ *
+ */
+public class PaginadorInstrucciones extends FragmentActivity  implements OnListenerMas ,OnClickListener,OnPageChangeListener{
 	
-	public final String TAG = this.getClass().getSimpleName();
-
 	private ViewPager pager = null;
-
-	
-
+	private ImageView btn_siguiente;
+	public final static int CONTACTO_GUARDADO=0;
+	public final static int CONTACTO_NO_GUARDADO=1;
+	private static OnListenerCambiarTexto onListenerCambiarTexto;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -40,68 +43,31 @@ public class PaginadorInstrucciones extends FragmentActivity  implements OnListe
 	     requestWindowFeature(Window.FEATURE_NO_TITLE);  
 		this.setContentView(R.layout.paginador_activity);
 
-		Display display = getWindowManager().getDefaultDisplay();
-		Point size = new Point();
-		display.getSize(size);
-		int width = size.x;
-		int height = size.y;
-		
-		
+	
+			
 		pager = (ViewPager)findViewById(R.id.pager_dialog);
 		pager.setOffscreenPageLimit(4);
 		
-		
+		/*Creamos las paginas*/
 		FragmentPagerAdapterDialog adapter = new FragmentPagerAdapterDialog(getSupportFragmentManager());
 		ScreenSlidePageFragmentDialog fragment = ScreenSlidePageFragmentDialog.newInstance(getResources().getColor(R.color.android_blue), 1,PaginadorInstrucciones.this);
 		adapter.addFragment(fragment);
 		adapter.addFragment(ScreenSlidePageFragmentDialog.newInstance(getResources().getColor(R.color.android_red), 2,PaginadorInstrucciones.this));
 		
 		
-		PaginaDosGuia.initialize( this );
+		PaginaDosGuia.setOnClickSiguienteListener( this ); //escucha del boton siguiente
 		
-		PaginadorInstrucciones.this.pager.setAdapter(adapter);
+		pager.setAdapter(adapter);
+		pager.setOnPageChangeListener(this);
 		
-		ImageView btn_siguiente =(ImageView)findViewById(R.id.instrucciones_btn_siguiente);
-		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(width / 2,height / 3);
+		
+		btn_siguiente =(ImageView)findViewById(R.id.instrucciones_btn_siguiente); 
+		Point p = Utils.getTamanoPantalla(PaginadorInstrucciones.this); //tama–o de pantalla
+		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(p.x / 2, p.y / 3);
 		btn_siguiente.setLayoutParams(lp);
+		btn_siguiente.setOnClickListener(this);
 		
-		btn_siguiente.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				if(PaginadorInstrucciones.this.pager.getCurrentItem()==0){
-					PaginadorInstrucciones.this.pager.setCurrentItem(1);
-				}else{
-					
-					new Utils(PaginadorInstrucciones.this).setPreferenciasSplash();
-					startActivity(new Intent(PaginadorInstrucciones.this,SafeBusMainActivity.class));
-					finish();
-				}
-				
-			}
-		});
-		
-		pager.setOnPageChangeListener(new OnPageChangeListener() {
-			
-			@Override
-			public void onPageSelected(int arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void onPageScrolled(int arg0, float arg1, int arg2) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void onPageScrollStateChanged(int arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-		
+	
 		
 	}
 	
@@ -115,13 +81,9 @@ public class PaginadorInstrucciones extends FragmentActivity  implements OnListe
 	}
 
 
-
-
-
-
 	@Override
 	public void onListenerMas() {
-		startActivityForResult(new Intent(PaginadorInstrucciones.this,ContactoActivity.class),1);
+		startActivityForResult(new Intent(PaginadorInstrucciones.this,ContactoActivity.class),9);
 		
 	}
 
@@ -129,19 +91,85 @@ public class PaginadorInstrucciones extends FragmentActivity  implements OnListe
 
 
 	@Override
-	public void startActivityForResult(Intent intent, int requestCode) {
-		// TODO Auto-generated method stub
-		super.startActivityForResult(intent, requestCode);
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.instrucciones_btn_siguiente:
+			if(PaginadorInstrucciones.this.pager.getCurrentItem()==0){
+				PaginadorInstrucciones.this.pager.setCurrentItem(1);
+			}else{
+				
+				new Utils(PaginadorInstrucciones.this).setPreferenciasSplash();
+				startActivity(new Intent(PaginadorInstrucciones.this,SafeBusMainActivity.class));
+				finish();
+			}
+			
+			break;
+		default:
+			break;
+		}
+		
+	}
+
+
+
+
+	@Override
+	public void onPageScrollStateChanged(int arg0) {}
+
+	@Override
+	public void onPageScrolled(int arg0, float arg1, int arg2) {}
+	@Override
+	public void onPageSelected(int index) {
+
+		if(index==0){
+			btn_siguiente.setImageResource(R.drawable.boton_siguiente_selector);
+		}else if(index==1){
+			btn_siguiente.setImageResource(R.drawable.boton_entiendo_selector);
+		}
 	}
 
 
 
 
 	
+@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-	
-	
-	
-	
-	   
+	    if (requestCode == 9) {
+	       switch (resultCode) {
+		case CONTACTO_GUARDADO:
+			onListenerCambiarTexto.onListenerCambiarTexto(CONTACTO_NO_GUARDADO);
+			break;
+		case CONTACTO_NO_GUARDADO:
+			onListenerCambiarTexto.onListenerCambiarTexto(CONTACTO_GUARDADO);	
+					break;
+		default:
+			break;
+		}
+	    	
+	    }
+	}
+
+
+		/**
+		 * Interface que comunica la pagina con la actividad 
+		 * @author mikesaurio
+		 *
+		 */
+		 public interface OnListenerCambiarTexto
+		    {
+		        void onListenerCambiarTexto(int tipo);
+		    }
+		
+		 /**
+		  * escucha para poder cambair el texto de la pagina 2
+		  * @param listener
+		  */
+		public static void setOnClickCambiarTextoListener( OnListenerCambiarTexto listener)
+		{
+		
+			onListenerCambiarTexto = listener;
+		}
+			
+		
 }

@@ -13,10 +13,12 @@ import org.apache.http.util.EntityUtils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Point;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.StrictMode;
+import android.view.Display;
 
 public class Utils {
 
@@ -103,7 +105,7 @@ public class Utils {
 	 *            (String) ruta del web service
 	 * @return (String) resultado del service
 	 */
-	public String doHttpConnection(String url) {
+	public static String doHttpConnection(String url) {
 		HttpClient Client = new DefaultHttpClient();
 		try {
 			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -122,6 +124,20 @@ public class Utils {
 		}
 	}
 
-
+	/**
+	 * obtienes el tama–o de pantalla
+	 * @param (activity) Activity
+	 * @return (Point) .x = width
+	 * 					.y = height 
+	 */
+		public static Point getTamanoPantalla(Activity activity){
+			Display display = activity.getWindowManager().getDefaultDisplay();
+			Point size = new Point();
+			 display.getSize(size);
+			int width = size.x;
+			int height = size.y;
+			return (new Point (width,height));
+		}
+	
 
 }

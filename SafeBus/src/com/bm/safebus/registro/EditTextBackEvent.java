@@ -39,15 +39,14 @@ public class EditTextBackEvent extends EditText {
 		 
 		  if (countStart >= 2) {
 				countStart = 0;
-				countTimer = true;
 				Activity act=(Activity)context;
 				act.onBackPressed();
-				//context.onBackPressed();
+				
+				
 			} else {
 				countStart += 1;
-				
 				if (countTimer) {
-					Mensajes.simpleToast(context, "Presiona una vez m‡s para salir", Toast.LENGTH_LONG);
+					Mensajes.simpleToast(context, "Presiona una vez m‡s para salir", Toast.LENGTH_SHORT);
 					countTimer = false;
 					handler_time.postDelayed(runnable, 10000);
 				}

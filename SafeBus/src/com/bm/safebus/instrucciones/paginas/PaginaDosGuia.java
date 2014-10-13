@@ -3,16 +3,17 @@ package com.bm.safebus.instrucciones.paginas;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Point;
 import android.util.AttributeSet;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.bm.safebus.R;
+import com.bm.safebus.instrucciones.PaginadorInstrucciones;
+import com.bm.safebus.instrucciones.PaginadorInstrucciones.OnListenerCambiarTexto;
+import com.bm.safebus.registro.ContactoActivity;
+import com.bm.savebus.utilerias.Utils;
 
 /**
  * pagina que muestra en una lista los adeudos de un carro con las secretarias
@@ -21,12 +22,13 @@ import com.bm.safebus.R;
  *
  */
 @SuppressLint("ViewConstructor")
-public class PaginaDosGuia extends View {
+public class PaginaDosGuia extends View implements OnListenerCambiarTexto {
 
 	
 	private View view;
 	private Activity context;
-	private static OnListenerMas listener;
+	private static OnListenerMas onListenerMas;
+	private TextView p2_tv_titulo,p2_tv_da_click;
 	
 	
 	public PaginaDosGuia(Activity context) {
@@ -53,14 +55,23 @@ public class PaginaDosGuia extends View {
 	 * init de la pagina
 	 */
 	public void init() {
-		Display display = context.getWindowManager().getDefaultDisplay();
-		Point size = new Point();
-		display.getSize(size);
-		int width = size.x;
-		int height = size.y;
-
+		
 		LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		view = inflater.inflate(R.layout.instrucciones_pag_dos, null);
+		
+		
+		PaginadorInstrucciones.setOnClickCambiarTextoListener(this); //escucha del cambio de texto
+		
+		p2_tv_titulo =(TextView)view.findViewById(R.id.instrucciones_p2_tv_titulo);
+		p2_tv_da_click =(TextView)view.findViewById(R.id.instrucciones_p2_tv_da_click);
+		
+		String[] info= new Utils(context).getPreferenciasContacto();
+		if(info[0]!=null){
+			cambiarTexto(PaginadorInstrucciones.CONTACTO_NO_GUARDADO);
+				
+		} else {
+			cambiarTexto(PaginadorInstrucciones.CONTACTO_GUARDADO);
+		}
 		
 		
 		
@@ -70,14 +81,13 @@ public class PaginaDosGuia extends View {
 			
 			@Override
 			public void onClick(View v) {
-				listener.onListenerMas();
+				onListenerMas.onListenerMas();
 				
 			}
 		});
 
 	}
 
-	
 
 	/**
 	 * GET view
@@ -86,15 +96,47 @@ public class PaginaDosGuia extends View {
 	public View getView() {
 		return view;
 	}
+	
+	
+	/**
+	 * Interface que comunica la pagina con la actividad 
+	 * @author mikesaurio
+	 *
+	 */
 	 public interface OnListenerMas
 	    {
 	        void onListenerMas();
 	    }
 
-	 
-	public static void initialize( OnListenerMas listener)
+	 /**
+	  * escucha para poder dar click a siguiente pagina
+	  * @param listener
+	  */
+	public static void setOnClickSiguienteListener( OnListenerMas listener)
 	{
+		onListenerMas = listener;
+	}
 
-		PaginaDosGuia.listener = listener;
-	}//
+	@Override
+	public void onListenerCambiarTexto(int tipo) {
+		
+		cambiarTexto( tipo);
+	}
+	
+	
+	public void cambiarTexto(int tipo){
+		switch (tipo) {
+		case PaginadorInstrucciones.CONTACTO_GUARDADO:
+			p2_tv_titulo.setText(getResources().getString(R.string.paginas_instrucciones_texto_pag_2_1));
+			p2_tv_da_click.setText(getResources().getString(R.string.paginas_instrucciones_texto_pag_2_2));
+			break;
+		case PaginadorInstrucciones.CONTACTO_NO_GUARDADO:
+			p2_tv_titulo.setText(getResources().getString(R.string.paginas_instrucciones_texto_pag_2_1_listo));
+			p2_tv_da_click.setText(getResources().getString(R.string.paginas_instrucciones_texto_pag_2_2_listo));
+			break;
+
+		default:
+			break;
+		}
+	}
 }
