@@ -4,6 +4,9 @@
     <string name="app_id">1505094703080117</string>
     <string name="app_name">SafeBus</string>
     <string name="hello_world">Hello world!</string>
+    
+     <string name="dialogo_btn_aceptar">Aceptar</string>
+    
     <string name="paginas_instrucciones_titulo">Bienvenido</string>
     <string name="paginas_instrucciones_texto_pag_1">Recuerda, si en algún momento te sientes inseguro o agredido, puedes apretar el botón de encendido cinco veces y se mandará una notificación al chofer y a un contacto que elegirás a continuación</string>
 

@@ -50,7 +50,10 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 	private ImageView iv_reporte_usuario,iv_reporte_chofer;
 	private int aviso_a= 0;
 	private Menu menu;
-	Point p;
+	private Point p;
+	private static final int ENVIAR_ALARMA_CHOFER=0;
+	private static final int ENVIAR_ALARMA_FAMILIAR_CHOFER=1;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -121,7 +124,9 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 		case R.id.safebus_btn_yo:
 			new MensajeTask().execute(1);
 			break;
-
+		case R.id.enviar_alarma_btn_aceptar:
+			customDialog.dismiss();
+			break;
 		default:
 			break;
 		}
@@ -161,6 +166,9 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 		Button btn_yo = (Button) view.findViewById(R.id.safebus_btn_yo);
 		btn_yo.setLayoutParams(lp);
 		btn_yo.setOnClickListener(this);
+		
+		Button btn_aceptar = (Button) view.findViewById(R.id.enviar_alarma_btn_aceptar);
+		btn_aceptar.setOnClickListener(this);
 
 		tv_problemas_titulo = (TextView) view.findViewById(R.id.safebus_tv_problemas_titulo);
 
@@ -180,6 +188,9 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 		
 		iv_reporte_usuario = (ImageView) view	.findViewById(R.id.enviar_alarma_iv_reporte_usuario);
 		iv_reporte_usuario.setLayoutParams(lp);
+		
+		
+		
 
 		return (customDialog = builder.create());
 	}
@@ -226,20 +237,34 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 	    	frameAnimation.stop();
 	    	ll_enviando_mensaje.setVisibility(LinearLayout.GONE);
 	    	ll_reporte_hecho.setVisibility(LinearLayout.VISIBLE);
-	    	if(aviso_a==1){
+	    	if(aviso_a==2){
 	    		tv_problemas_titulo.setText(getResources().getString(R.string.notificar_chofer));
-	    		iv_reporte_usuario.setVisibility(ImageView.VISIBLE);
-	    	}else{
-	    		tv_problemas_titulo.setText(getResources().getString(R.string.notificar_chofer_familia));
-	    		
-	    		iv_reporte_usuario.setVisibility(ImageView.VISIBLE);
 	    		iv_reporte_chofer.setVisibility(ImageView.VISIBLE);
+	    		enviarAlarma(ENVIAR_ALARMA_CHOFER);
+	    	}else{
+	    		String[] info= new Utils(SafeBusMainActivity.this).getPreferenciasContacto();
+		  		if(info[0]!=null){
+		  			tv_problemas_titulo.setText(getResources().getString(R.string.notificar_chofer_familia));
+		    		iv_reporte_usuario.setVisibility(ImageView.VISIBLE);
+		    		iv_reporte_chofer.setVisibility(ImageView.VISIBLE);
+		    		enviarAlarma(ENVIAR_ALARMA_FAMILIAR_CHOFER);
+		  				
+		  		} else {
+		  			tv_problemas_titulo.setText(getResources().getString(R.string.notificar_chofer));
+		    		iv_reporte_chofer.setVisibility(ImageView.VISIBLE);
+		    		enviarAlarma(ENVIAR_ALARMA_CHOFER);
+		  		}
+	    		
+	    		
+	    		
 	    	}
 	    	
 	    	
 	        super.onPostExecute(result);
 	       
 	    }
+
+		
 	}
 
 	
@@ -284,6 +309,11 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 	    }
 	  } 
 	
+	
+	public void enviarAlarma(int enviarAlarmaTipo) {
+	
+		
+	}
 	
 
 }
