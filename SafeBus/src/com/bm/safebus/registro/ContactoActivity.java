@@ -37,7 +37,7 @@ import com.mikesaurio.mensajesydialogos.Mensajes;
 public class ContactoActivity extends Activity  {
 	private ImageButton btn_contacto;
 	private ArrayList<String> listaCels;
-	private EditTextBackEvent et_telefono,et_correo;
+	private EditTextBackEvent et_telefono,et_mensaje_emergencia;
 	AlertDialog customDialog= null;
 	private Button btn_guardar;
 	private ImageView ImageView_titulo_contacto;
@@ -52,7 +52,7 @@ public class ContactoActivity extends Activity  {
 		
 		
 		et_telefono=(EditTextBackEvent)findViewById(R.id.registro_et_telefono);
-		et_correo=(EditTextBackEvent)findViewById(R.id.registro_et_correo);
+		et_mensaje_emergencia=(EditTextBackEvent)findViewById(R.id.registro_et_mensaje_emergencia);
 		
 		btn_guardar=(Button)findViewById(R.id.registro_btn_guardar);
 		btn_guardar.setOnClickListener(new View.OnClickListener() {
@@ -61,8 +61,9 @@ public class ContactoActivity extends Activity  {
 			public void onClick(View v) {
 				if(validaEditText()){
 					new Utils(ContactoActivity.this).setPreferenciasContacto(
-							new String[]{et_telefono.getText().toString(),et_correo.getText().toString()});
+							new String[]{et_telefono.getText().toString(),et_mensaje_emergencia.getText().toString()});
 					Mensajes.simpleToast(ContactoActivity.this, "Contacto guardado", Toast.LENGTH_LONG);
+					
 					Intent returnIntent = new Intent();
 					setResult(PaginadorInstrucciones.CONTACTO_GUARDADO, returnIntent);
 					finish();
@@ -85,7 +86,7 @@ public class ContactoActivity extends Activity  {
 		String[] info= new Utils(ContactoActivity.this).getPreferenciasContacto();
 		if(info[0]!=null){
 			et_telefono.setText(info[0]);
-			et_correo.setText(info[1]);
+			et_mensaje_emergencia.setText(info[1]);
 		}
 		
 		
@@ -167,7 +168,7 @@ public class ContactoActivity extends Activity  {
 			       }
 		
 			       // Find Email Addresses
-			       Cursor emails = getContentResolver().query(ContactsContract.CommonDataKinds.Email.CONTENT_URI,null,ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = " + contactId,null, null);
+			    /*   Cursor emails = getContentResolver().query(ContactsContract.CommonDataKinds.Email.CONTENT_URI,null,ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = " + contactId,null, null);
 
 			       while (emails.moveToNext()) 
 			       {
@@ -178,7 +179,7 @@ public class ContactoActivity extends Activity  {
 			        break;
 			       }
 			       
-			       emails.close();
+			       emails.close();*/
 			       break;
 			  }  
 			  }
@@ -225,8 +226,8 @@ public class ContactoActivity extends Activity  {
       		//  Mensajes.simpleToast(ContactoActivity.this, getResources().getString(R.string.registro_telefono_vacio), Toast.LENGTH_LONG);
       		  return false;
       	  }
-    	  if(et_correo.getText().toString().equals("")){
-    		  et_correo.setError(getResources().getString(R.string.registro_correo_vacio));
+    	  if(et_mensaje_emergencia.getText().toString().equals("")){
+    		  et_mensaje_emergencia.setError(getResources().getString(R.string.registro_correo_vacio));
     		 // Mensajes.simpleToast(ContactoActivity.this, getResources().getString(R.string.registro_correo_vacio), Toast.LENGTH_LONG);
     		  return false;
     	  }
@@ -241,10 +242,10 @@ public class ContactoActivity extends Activity  {
       		  return false;  
     	  }
     	  
-    	  if(!EditTextValidator.esCorreo(et_correo)){
+    	/*  if(!EditTextValidator.esCorreo(et_correo)){
     		  et_correo.setError(getResources().getString(R.string.registro_correo_incorrecto));
 			  return false;
-		  }
+		  }*/
 		return true;
 	}
 

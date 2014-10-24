@@ -49,7 +49,7 @@ public class Utils {
 		SharedPreferences prefs = activity.getSharedPreferences("PreferenciasSafeBus", Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = prefs.edit();
 		editor.putString("telefono", info[0]);
-		editor.putString("correo", info[1]);
+		editor.putString("mensaje", info[1]);
 		editor.commit();
 	}
 
@@ -58,7 +58,7 @@ public class Utils {
 		SharedPreferences prefs = activity.getSharedPreferences("PreferenciasSafeBus", Context.MODE_PRIVATE);
 		String[] info = new String[2];
 		info[0]=prefs.getString("telefono", null);
-		info[1]=prefs.getString("correo", null);
+		info[1]=prefs.getString("mensaje", null);
 		return info;
 	}
 	

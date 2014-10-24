@@ -1,18 +1,22 @@
 package com.bm.safebus;
 
+import java.util.Arrays;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Display;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,12 +27,20 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bm.safebus.facebook.FacebookLoginActivity;
-import com.bm.safebus.instrucciones.PaginadorInstrucciones;
 import com.bm.safebus.mapa.MapaTrackingActivity;
+import com.bm.safebus.panico.PanicAlert;
 import com.bm.safebus.registro.ContactoActivity;
 import com.bm.savebus.utilerias.Utils;
+import com.facebook.FacebookRequestError;
+import com.facebook.HttpMethod;
+import com.facebook.Request;
+import com.facebook.Response;
+import com.facebook.Session;
+import com.facebook.SessionState;
+import com.facebook.model.GraphUser;
 import com.mikesaurio.mensajesydialogos.Mensajes;
 
 /**
@@ -39,6 +51,10 @@ import com.mikesaurio.mensajesydialogos.Mensajes;
  */
 public class SafeBusMainActivity extends Activity implements OnClickListener {
 
+	//Facebook
+	private final List<String> PERMISSIONS_TO_READ = Arrays.asList("user_likes", "user_status","public_profile");
+	
+	
 	public Button btn_encuentra;
 	public Button btn_reporta;
 	public Button btn_conecta;
@@ -53,6 +69,7 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 	private Point p;
 	private static final int ENVIAR_ALARMA_CHOFER=0;
 	private static final int ENVIAR_ALARMA_FAMILIAR_CHOFER=1;
+	String[] info;
 	
 
 	@Override
@@ -75,8 +92,7 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 		mActionBar.setDisplayShowCustomEnabled(true);
 		/**/
 		
-		
-		
+		info= new Utils(SafeBusMainActivity.this).getPreferenciasContacto();
 
 		 p = Utils.getTamanoPantalla(SafeBusMainActivity.this);
 
@@ -116,7 +132,7 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 			break;
 
 		case R.id.safebus_btn_conecta:
-			iniciarActividad(FacebookLoginActivity.class);
+			facebookLoguin();
 			break;
 		case R.id.safebus_btn_alguien_mas:
 		new MensajeTask().execute(2);
@@ -133,6 +149,8 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 
 	}
 
+	
+
 	/**
 	 * 
 	 * @param clase
@@ -141,11 +159,240 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 		startActivity(new Intent(SafeBusMainActivity.this, clase));
 	}
 
+	
+	
+	
+	/**
+	 * Envia alarma de emergencia 
+	 * @param tipo (int)
+	 * ENVIAR_ALARMA_FAMILIAR_CHOFER envia la alarma al chofer y un SMS a contacto de emergencia
+	 * ENVIAR_ALARMA_CHOFER envia alarma a chofer
+	 */
+	public void enviarAlarma(int tipo) {
+	switch (tipo) {
+	case ENVIAR_ALARMA_CHOFER:
+		
+		break;
+	case ENVIAR_ALARMA_FAMILIAR_CHOFER:
+		
+		PanicAlert.sendSMS(info[0], getString(R.string.mensaje_emergencia));
+
+		break;
+
+	default:
+		break;
+		}
+	}
+	
+	/*Facebook*/
+	
+	/**
+	 * metodo que inicia la sesion de facebook con autorizacion del usuario
+	 */
+	Session.StatusCallback SessionStatusCallback = new Session.StatusCallback() {
+		@Override
+		public void call(Session session, SessionState state, Exception exception) {
+			if (session.isOpened()) {
+				Request.newMeRequest(session, new Request.GraphUserCallback() {
+					@Override
+					public void onCompleted(GraphUser user, Response response) {
+						if (user != null) {
+							likePage();
+						}
+					}
+				}).executeAsync();
+			}
+		}
+	};
+	
+	
+	/**
+	 * Comprueba que el usuario haya dado like a una pagina de facebook
+	 */
+	private void likePage() {
+		Session session = Session.getActiveSession();
+		if (session != null) {
+			Request likeRequest = new Request(session, 
+					"/me/likes/775396332498712",
+					//"/me",
+					null,
+					HttpMethod.GET,
+					new Request.Callback() {
+						@Override
+						public void onCompleted(Response response) {
+							FacebookRequestError error = response.getError();
+							if (error != null) {
+								Log.i("error like", error.getErrorMessage().toString());
+							} else {
+								try{
+								 JSONArray albumArr = response.getGraphObject().getInnerJSONObject().getJSONArray("data");
+								 if(albumArr.length()>0){
+									//Toast.makeText(SafeBusMainActivity.this, "dialogo", Toast.LENGTH_LONG).show();
+								//	 if(Utils.)
+									 
+								 }else{
+									 iniciarActividad( FacebookLoginActivity.class);
+								 }
+								}catch(JSONException e){
+									e.printStackTrace();
+								}
+							}
+						}
+					});
+			Request.executeBatchAsync(likeRequest);
+		}
+	}
+	
+	/**
+	 * Permite iniciar sesion de facebook
+	 */
+	public void facebookLoguin() {
+		Session s = new Session(this);
+		Session.setActiveSession(s);
+		Session.OpenRequest request = new Session.OpenRequest(this);
+		request.setPermissions(PERMISSIONS_TO_READ);
+		request.setCallback(SessionStatusCallback);
+		s.openForRead(request);
+		
+	}
+
+	/*termina Facebook*/
+	
+	@Override
+	  public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	    case R.id.menuadd:
+	    	startActivity(new Intent(SafeBusMainActivity.this,ContactoActivity.class));
+	      return true;
+	    case R.id.menuabouth:
+	    	return true;
+	  
+	    default:
+	    	return false;
+	    }
+	  } 
+	
+	
+	
+	
+	@Override
+	  public boolean onCreateOptionsMenu(Menu menu) {
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.menu_main, menu);
+	  this.menu=menu;
+	  MenuItem bedMenuItem = menu.findItem(R.id.menuadd);
+	 	info= new Utils(SafeBusMainActivity.this).getPreferenciasContacto();
+	  		if(info[0]!=null){
+	  			 bedMenuItem.setTitle(getResources().getString(R.string.main_editar_contacto));
+	  				
+	  		} else {
+	  			 bedMenuItem.setTitle(getResources().getString(R.string.main_agregar_contacto));
+	  		}
+	    return true;
+	  } 
+	
+	
+	@Override
+	protected void onResume() {
+		if(menu!=null){
+		 MenuItem bedMenuItem = menu.findItem(R.id.menuadd);
+		 	info= new Utils(SafeBusMainActivity.this).getPreferenciasContacto();
+		  		if(info[0]!=null){
+		  			 bedMenuItem.setTitle(getResources().getString(R.string.main_editar_contacto));
+		  				
+		  		} else {
+		  			 bedMenuItem.setTitle(getResources().getString(R.string.main_agregar_contacto));
+		  		}
+	}
+		super.onResume();
+	}
+
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(requestCode==10){
+			if(resultCode == RESULT_OK){
+				
+			}
+		super.onActivityResult(requestCode, resultCode, data);
+		}else{
+			Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);//necesarui para el  fanPage de Facebook
+		}
+	}
+	
+	
+	
+	/**
+	 * Clase que envia al contacto de emergencia 
+	 * @author mikesaurio
+	 *
+	 */
+	private class MensajeTask extends AsyncTask<Integer, Void, Boolean> {
+	    private long time;
+
+	    @Override
+	    protected void onPreExecute() {
+	    
+	    	ll_quien.setVisibility(LinearLayout.GONE);
+			ll_enviando_mensaje.setVisibility(LinearLayout.VISIBLE);
+			tv_problemas_titulo.setText("Enviando alarma...");
+			frameAnimation.start();
+			if(aviso_a==2){
+	    		enviarAlarma(ENVIAR_ALARMA_CHOFER);
+	    	}else{
+	    		
+		  		if(info[0]!=null){
+		    		enviarAlarma(ENVIAR_ALARMA_FAMILIAR_CHOFER);
+		  				
+		  		} else {
+		    		enviarAlarma(ENVIAR_ALARMA_CHOFER);
+		  		}
+	    	}
+	    	
+	        super.onPreExecute();
+	        time = System.currentTimeMillis();
+	    }
+
+	    @Override
+	    protected Boolean doInBackground(Integer... params) {
+	    	aviso_a=params[0];
+	    	
+	        try {
+	            Thread.sleep(5000);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        return null;
+	    }
+	    
+	    @Override
+	    protected void onPostExecute(Boolean result) {
+	    	frameAnimation.stop();
+	    	ll_enviando_mensaje.setVisibility(LinearLayout.GONE);
+	    	ll_reporte_hecho.setVisibility(LinearLayout.VISIBLE);
+	    	if(aviso_a==2){
+	    		tv_problemas_titulo.setText(getResources().getString(R.string.notificar_chofer));
+	    		iv_reporte_chofer.setVisibility(ImageView.VISIBLE);
+	    	}else{
+	    		String[] info= new Utils(SafeBusMainActivity.this).getPreferenciasContacto();
+		  		if(info[0]!=null){
+		  			tv_problemas_titulo.setText(getResources().getString(R.string.notificar_chofer_familia));
+		    		iv_reporte_usuario.setVisibility(ImageView.VISIBLE);
+		    		iv_reporte_chofer.setVisibility(ImageView.VISIBLE);
+		  				
+		  		} else {
+		  			tv_problemas_titulo.setText(getResources().getString(R.string.notificar_chofer));
+		    		iv_reporte_chofer.setVisibility(ImageView.VISIBLE);
+		  		}	
+	    	}
+	        super.onPostExecute(result);  
+	    }
+	}
+
+	/*Dialogos*/
 	/**
 	 * Dialogo para asegurar que quieres salir de la app
 	 * 
-	 * @param Activity
-	 *            (actividad que llama al di‡logo)
 	 * @return Dialog (regresa el dialogo creado)
 	 **/
 
@@ -188,132 +435,37 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 		
 		iv_reporte_usuario = (ImageView) view	.findViewById(R.id.enviar_alarma_iv_reporte_usuario);
 		iv_reporte_usuario.setLayoutParams(lp);
-		
-		
-		
 
 		return (customDialog = builder.create());
 	}
 	
-	
+	/**
+	 * Dialogo que muestra al usuario una espera para que llegue la contrasena de wifi
+	 * @return Dialog (regresa el dialogo creado)
+	 */
+	public Dialog showDialogEsperandoContrasena(){
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		View view = getLayoutInflater()	.inflate(R.layout.activity_reporte, null);
+		builder.setView(view);
+		builder.setCancelable(true);
+		
+		
+		return (customDialog = builder.create());
+	}
 	
 	/**
-	 * Clase que envia al contacto de emergencia 
-	 * @author mikesaurio
-	 *
+	 * Dialogo que muestra al usuario una espera para que llegue la contrasena de wifi
+	 * @return Dialog (regresa el dialogo creado)
 	 */
-	private class MensajeTask extends AsyncTask<Integer, Void, Boolean> {
-	    private long time;
-
-	    @Override
-	    protected void onPreExecute() {
-	    
-	    	ll_quien.setVisibility(LinearLayout.GONE);
-			ll_enviando_mensaje.setVisibility(LinearLayout.VISIBLE);
-			tv_problemas_titulo.setText("Enviando alarma...");
-			frameAnimation.start();
-	    	
-	        super.onPreExecute();
-	        time = System.currentTimeMillis();
-	    }
-
-	    @Override
-	    protected Boolean doInBackground(Integer... params) {
-	    	aviso_a=params[0];
-	    	
-	        try {
-	            Thread.sleep(5000);
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
-	        return null;
-	    }
-
-	    
-	    
-	    
-	    @Override
-	    protected void onPostExecute(Boolean result) {
-	    	frameAnimation.stop();
-	    	ll_enviando_mensaje.setVisibility(LinearLayout.GONE);
-	    	ll_reporte_hecho.setVisibility(LinearLayout.VISIBLE);
-	    	if(aviso_a==2){
-	    		tv_problemas_titulo.setText(getResources().getString(R.string.notificar_chofer));
-	    		iv_reporte_chofer.setVisibility(ImageView.VISIBLE);
-	    		enviarAlarma(ENVIAR_ALARMA_CHOFER);
-	    	}else{
-	    		String[] info= new Utils(SafeBusMainActivity.this).getPreferenciasContacto();
-		  		if(info[0]!=null){
-		  			tv_problemas_titulo.setText(getResources().getString(R.string.notificar_chofer_familia));
-		    		iv_reporte_usuario.setVisibility(ImageView.VISIBLE);
-		    		iv_reporte_chofer.setVisibility(ImageView.VISIBLE);
-		    		enviarAlarma(ENVIAR_ALARMA_FAMILIAR_CHOFER);
-		  				
-		  		} else {
-		  			tv_problemas_titulo.setText(getResources().getString(R.string.notificar_chofer));
-		    		iv_reporte_chofer.setVisibility(ImageView.VISIBLE);
-		    		enviarAlarma(ENVIAR_ALARMA_CHOFER);
-		  		}
-	    		
-	    		
-	    		
-	    	}
-	    	
-	    	
-	        super.onPostExecute(result);
-	       
-	    }
-
+	public Dialog showDialogCalificarServicio(){
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		View view = getLayoutInflater()	.inflate(R.layout.activity_reporte, null);
+		builder.setView(view);
+		builder.setCancelable(true);
 		
-	}
-
-	
-	@Override
-	  public boolean onCreateOptionsMenu(Menu menu) {
-	    MenuInflater inflater = getMenuInflater();
-	    inflater.inflate(R.menu.menu_main, menu);
-	  this.menu=menu;
-	    return true;
-	  } 
-	
-	
-	
-	
-	
-	@Override
-	protected void onResume() {
-		if(menu!=null){
-		 MenuItem bedMenuItem = menu.findItem(R.id.menuadd);
-		    String[] info= new Utils(SafeBusMainActivity.this).getPreferenciasContacto();
-		  		if(info[0]!=null){
-		  			 bedMenuItem.setTitle(getResources().getString(R.string.main_editar_contacto));
-		  				
-		  		} else {
-		  			 bedMenuItem.setTitle(getResources().getString(R.string.main_agregar_contacto));
-		  		}
-	}
-		super.onResume();
-	}
-
-	@Override
-	  public boolean onOptionsItemSelected(MenuItem item) {
-	    switch (item.getItemId()) {
-	    case R.id.menuadd:
-	    	startActivity(new Intent(SafeBusMainActivity.this,ContactoActivity.class));
-	      return true;
-	    case R.id.menuabouth:
-	    	return true;
-	  
-	    default:
-	    	return false;
-	    }
-	  } 
-	
-	
-	public void enviarAlarma(int enviarAlarmaTipo) {
-	
-		
+		return (customDialog = builder.create());
 	}
 	
-
+	/*Termina Dialogos*/
+	
 }

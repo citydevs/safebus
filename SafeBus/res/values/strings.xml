@@ -4,16 +4,17 @@
     <string name="app_id">1505094703080117</string>
     <string name="app_name">SafeBus</string>
     <string name="hello_world">Hello world!</string>
-    
-     <string name="dialogo_btn_aceptar">Aceptar</string>
-    
+    <string name="dialogo_btn_aceptar">Aceptar</string>
     <string name="paginas_instrucciones_titulo">Bienvenido</string>
-    <string name="paginas_instrucciones_texto_pag_1">Recuerda, si en algún momento te sientes inseguro o agredido, puedes apretar el botón de encendido cinco veces y se mandará una notificación al chofer y a un contacto que elegirás a continuación</string>
+    <string name="paginas_instrucciones_texto_pag_1">Recuerda, si en algún momento te sientes inseguro o agredido, puedes apretar el botón de REPORTA y se mandará una notificación al chofer y a un contacto que elegirás a continuación</string>
+    <string name="instrucciones_contacto">Si en algún momento te sientes inseguro o agredido, puedes apretar el botón de REPORTA y se mandará una notificación al chofer y al contacto que elijas en este momento.</string>
+    <string name="mensaje_emergencia">Marcame en cuanto puedas a mi celular</string>
+    <string name="mensaje_emergencia_hint">Agrega mensaje de emergencia</string>
 
     <!-- Mapa -->
-     <string name="mapa_espera">¡Espera! te estamos localizando</string>
-     <string name="mapa_mi_ubicacion">Mi ubicación</string>
-    
+    <string name="mapa_espera">¡Espera! te estamos localizando</string>
+    <string name="mapa_mi_ubicacion">Mi ubicación</string>
+
     <!-- Pagina 2 -->
     <string name="paginas_instrucciones_texto_pag_2_1">Da click en el botón “+” para AGREGAR un contacto para notificaciones.</string>
     <string name="paginas_instrucciones_texto_pag_2_2">Si no quieres agregarlo, da click en Entiendo.</string>
@@ -23,10 +24,11 @@
     <string name="problemas_titulo">¿Quién está teniendo problemas?</string>
     <string name="notificar_chofer_familia">Gracias por reportar, hemos mandado una notificación al chofer y a tu contacto de seguridad.</string>
     <string name="notificar_chofer">Gracias por reportar, hemos mandado una notificación al chofer.</string>
-    <string name="notificar_acceso_wifi">Para acceder al WiFi, da like al grupo de SafeBus y te mandaremos la contraseña</string>
-    <string name="gracias_por_compartir">Gracias. 
+    <string name="notificar_acceso_wifi">Para acceder al WiFi del autobus, da like al grupo de SafeBus y te mandaremos la contraseña</string>
+    <string name="gracias_por_compartir">
 En ese grupo podrás compartir mejor tu perspectiva sobre esta campaña y el servicio que se está dando en la línea de autobús. 
-Para obtener la contraseña la próxima vez que hagas un viaje, te pediremos que califiques tu viaje una vez que bajes del autobús. </string>
+ </string>
+ <string name="gracias_por_compartir_banda">Para obtener la contraseña la próxima vez que hagas un viaje, te pediremos que califiques tu viaje una vez que bajes del autobús.</string>
     <string name="gracias_por_realimentacion">Gracias por dar retroalimentación en tu viaje anterior. En un momento enviaremos la contraseña del WiFi. </string>
     <string name="safebus_menu_encuentra">Encuentra</string>
     <string name="safebus_menu_reporta">Reporta</string>
@@ -44,7 +46,7 @@ Para obtener la contraseña la próxima vez que hagas un viaje, te pediremos que
     <string name="registro_et_correo">Correo</string>
     <string name="registro_selecciona_uno">Selecciona uno</string>
     <string name="registro_telefono_vacio">Debes llenar el teléfono correctamente</string>
-    <string name="registro_correo_vacio">Debes llenar el correo correctamente</string>
+    <string name="registro_correo_vacio">El mensaje No puede estar vacio</string>
     <string name="registro_telefono_largo">El teléfono debe ser de 10 digitos</string>
     <string name="registro_telefono_incorrecto">El teléfono debe ser sólo de números</string>
     <string name="registro_correo_incorrecto">El correo esta mal escrito</string>

@@ -32,9 +32,6 @@ public class SplashActivity extends Activity {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_splash);
-
-		
-
 		FrameLayout frame_splash = (FrameLayout) findViewById(R.id.frame_splash);
 
 		Point p = Utils.getTamanoPantalla(SplashActivity.this); //tama–o de pantalla
@@ -43,14 +40,12 @@ public class SplashActivity extends Activity {
 		lp.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
 		frame_splash.setLayoutParams(lp);
 		
-		
 		if (new Utils(SplashActivity.this).getPreferenciasSplash()) {//si ya se hacepto el tutorial
 			init(SafeBusMainActivity.class);
 		} else {
 			init(PaginadorInstrucciones.class);
 
 		}
-
 	}
 
 	/**
