@@ -181,6 +181,7 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 	    	startActivity(new Intent(SafeBusMainActivity.this,ContactoActivity.class));
 	      return true;
 	    case R.id.menuabouth:
+	    	Mensajes.mostrarAercaDe(SafeBusMainActivity.this).show();
 	    	return true;
 	  
 	    default:
@@ -345,33 +346,5 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 		return (customDialog = builder.create());
 	}
 	
-	/**
-	 * Dialogo que muestra al usuario una espera para que llegue la contrasena de wifi
-	 * @return Dialog (regresa el dialogo creado)
-	 */
-	public Dialog showDialogEsperandoContrasena(){
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		View view = getLayoutInflater()	.inflate(R.layout.activity_reporte, null);
-		builder.setView(view);
-		builder.setCancelable(true);
-		
-		
-		return (customDialog = builder.create());
-	}
-	
-	/**
-	 * Dialogo que muestra al usuario una espera para que llegue la contrasena de wifi
-	 * @return Dialog (regresa el dialogo creado)
-	 */
-	public Dialog showDialogCalificarServicio(){
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		View view = getLayoutInflater()	.inflate(R.layout.activity_reporte, null);
-		builder.setView(view);
-		builder.setCancelable(true);
-		
-		return (customDialog = builder.create());
-	}
-	
-	/*Termina Dialogos*/
 	
 }

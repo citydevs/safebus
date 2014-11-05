@@ -7,12 +7,9 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
-import android.view.Display;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -62,7 +59,7 @@ public class ContactoActivity extends Activity  {
 				if(validaEditText()){
 					new Utils(ContactoActivity.this).setPreferenciasContacto(
 							new String[]{et_telefono.getText().toString(),et_mensaje_emergencia.getText().toString()});
-					Mensajes.simpleToast(ContactoActivity.this, "Contacto guardado", Toast.LENGTH_LONG);
+					Mensajes.Toast(ContactoActivity.this, "Contacto guardado", Toast.LENGTH_SHORT);
 					
 					Intent returnIntent = new Intent();
 					setResult(PaginadorInstrucciones.CONTACTO_GUARDADO, returnIntent);
@@ -255,13 +252,13 @@ public class ContactoActivity extends Activity  {
 	public void onBackPressed() {
 		String[] info= new Utils(ContactoActivity.this).getPreferenciasContacto();
 		if(info[0]!=null){
-			Mensajes.simpleToast(ContactoActivity.this, "Datos actualizados", Toast.LENGTH_LONG);
+			Mensajes.Toast(ContactoActivity.this, "Datos actualizados", Toast.LENGTH_SHORT);
 			Intent returnIntent = new Intent();
 			setResult(PaginadorInstrucciones.CONTACTO_GUARDADO, returnIntent);
 			finish();
 				
 		} else {
-			Mensajes.simpleToast(ContactoActivity.this, "Datos NO guardados", Toast.LENGTH_LONG);
+			Mensajes.Toast(ContactoActivity.this, "Datos NO guardados", Toast.LENGTH_SHORT);
 			Intent returnIntent = new Intent();
 			setResult(PaginadorInstrucciones.CONTACTO_NO_GUARDADO, returnIntent);
 			finish();

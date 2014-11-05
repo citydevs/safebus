@@ -46,7 +46,7 @@ public class EditTextBackEvent extends EditText {
 			} else {
 				countStart += 1;
 				if (countTimer) {
-					Mensajes.simpleToast(context, "Presiona una vez m‡s para salir", Toast.LENGTH_SHORT);
+					Mensajes.Toast((Activity)context, "Presiona una vez m‡s para salir", Toast.LENGTH_SHORT);
 					countTimer = false;
 					handler_time.postDelayed(runnable, 10000);
 				}
