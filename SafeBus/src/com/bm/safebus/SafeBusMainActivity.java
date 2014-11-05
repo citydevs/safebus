@@ -1,11 +1,5 @@
 package com.bm.safebus;
 
-import java.util.Arrays;
-import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -16,7 +10,6 @@ import android.graphics.Point;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,20 +20,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bm.safebus.facebook.FacebookLoginActivity;
 import com.bm.safebus.mapa.MapaTrackingActivity;
 import com.bm.safebus.panico.PanicAlert;
 import com.bm.safebus.registro.ContactoActivity;
 import com.bm.savebus.utilerias.Utils;
-import com.facebook.FacebookRequestError;
-import com.facebook.HttpMethod;
-import com.facebook.Request;
-import com.facebook.Response;
 import com.facebook.Session;
-import com.facebook.SessionState;
-import com.facebook.model.GraphUser;
 import com.mikesaurio.mensajesydialogos.Mensajes;
 
 /**
@@ -50,11 +36,7 @@ import com.mikesaurio.mensajesydialogos.Mensajes;
  * 
  */
 public class SafeBusMainActivity extends Activity implements OnClickListener {
-
-	//Facebook
-	private final List<String> PERMISSIONS_TO_READ = Arrays.asList("user_likes", "user_status","public_profile");
-	
-	
+		
 	public Button btn_encuentra;
 	public Button btn_reporta;
 	public Button btn_conecta;
@@ -70,11 +52,13 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 	private static final int ENVIAR_ALARMA_CHOFER=0;
 	private static final int ENVIAR_ALARMA_FAMILIAR_CHOFER=1;
 	String[] info;
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		
+		
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		
@@ -132,7 +116,7 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 			break;
 
 		case R.id.safebus_btn_conecta:
-			facebookLoguin();
+			iniciarActividad(FacebookLoginActivity.class);
 			break;
 		case R.id.safebus_btn_alguien_mas:
 		new MensajeTask().execute(2);
@@ -186,77 +170,9 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 	
 	/*Facebook*/
 	
-	/**
-	 * metodo que inicia la sesion de facebook con autorizacion del usuario
-	 */
-	Session.StatusCallback SessionStatusCallback = new Session.StatusCallback() {
-		@Override
-		public void call(Session session, SessionState state, Exception exception) {
-			if (session.isOpened()) {
-				Request.newMeRequest(session, new Request.GraphUserCallback() {
-					@Override
-					public void onCompleted(GraphUser user, Response response) {
-						if (user != null) {
-							likePage();
-						}
-					}
-				}).executeAsync();
-			}
-		}
-	};
 	
 	
-	/**
-	 * Comprueba que el usuario haya dado like a una pagina de facebook
-	 */
-	private void likePage() {
-		Session session = Session.getActiveSession();
-		if (session != null) {
-			Request likeRequest = new Request(session, 
-					"/me/likes/775396332498712",
-					//"/me",
-					null,
-					HttpMethod.GET,
-					new Request.Callback() {
-						@Override
-						public void onCompleted(Response response) {
-							FacebookRequestError error = response.getError();
-							if (error != null) {
-								Log.i("error like", error.getErrorMessage().toString());
-							} else {
-								try{
-								 JSONArray albumArr = response.getGraphObject().getInnerJSONObject().getJSONArray("data");
-								 if(albumArr.length()>0){
-									//Toast.makeText(SafeBusMainActivity.this, "dialogo", Toast.LENGTH_LONG).show();
-								//	 if(Utils.)
-									 
-								 }else{
-									 iniciarActividad( FacebookLoginActivity.class);
-								 }
-								}catch(JSONException e){
-									e.printStackTrace();
-								}
-							}
-						}
-					});
-			Request.executeBatchAsync(likeRequest);
-		}
-	}
-	
-	/**
-	 * Permite iniciar sesion de facebook
-	 */
-	public void facebookLoguin() {
-		Session s = new Session(this);
-		Session.setActiveSession(s);
-		Session.OpenRequest request = new Session.OpenRequest(this);
-		request.setPermissions(PERMISSIONS_TO_READ);
-		request.setCallback(SessionStatusCallback);
-		s.openForRead(request);
-		
-	}
 
-	/*termina Facebook*/
 	
 	@Override
 	  public boolean onOptionsItemSelected(MenuItem item) {
@@ -308,17 +224,7 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 	}
 
 	
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if(requestCode==10){
-			if(resultCode == RESULT_OK){
-				
-			}
-		super.onActivityResult(requestCode, resultCode, data);
-		}else{
-			Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);//necesarui para el  fanPage de Facebook
-		}
-	}
+	
 	
 	
 	

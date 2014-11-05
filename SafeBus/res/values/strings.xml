@@ -54,4 +54,7 @@ En ese grupo podrás compartir mejor tu perspectiva sobre esta campaña y el ser
     <string name="title_activity_enviar_alarma">EnviarAlarmaActivity</string>
     <string name="alarma_enviando">Enviando alarma.</string>
 
+    
+    <!-- conectar -->
+    <string name="Pagina_liked">En un momento te enviaremos la contraseña</string>
 </resources>
