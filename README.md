@@ -1,20 +1,6 @@
-![alt tag](https://raw.githubusercontent.com/mikesaurio/pastillero/master/Pastillero/res/drawable-hdpi/ic_launcher.png?raw=true) PASTILLERO
+SafeBus
 ============
 
-App que te recuerda cuando debes tomar tu medicamento y tus citas al medico.
-
-Para una cita debes indicar:
-* Titulo 
-* Fecha
-* Hora
-
-Para una recordatorio de medicamento debes indicar:
-* Titulo
-* Fecha de inicio
-* Fecha de fin
-* Hora inicial
-* Frecuencia de toma
-                
 
 
 # Idiomas
