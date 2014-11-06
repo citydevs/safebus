@@ -15,6 +15,7 @@ import android.view.Window;
 import android.widget.Toast;
 
 import com.bm.safebus.R;
+import com.bm.safebus.gcm.GCM;
 import com.facebook.FacebookRequestError;
 import com.facebook.HttpMethod;
 import com.facebook.Request;
@@ -26,6 +27,7 @@ import com.facebook.model.GraphUser;
 import com.facebook.widget.LikeView;
 import com.facebook.widget.LoginButton;
 import com.facebook.widget.LoginButton.UserInfoChangedCallback;
+import com.mikesaurio.mensajesydialogos.Mensajes;
 
 
 /**
@@ -61,6 +63,7 @@ public class FacebookLoginActivity extends Activity {
 						
 						loginBtn.setVisibility(LoginButton.GONE);
 						likeButton.setVisibility(LikeView.VISIBLE);
+						likePage();
 						
 					} 
 				}
@@ -76,7 +79,7 @@ public class FacebookLoginActivity extends Activity {
 		public void call(Session session, SessionState state,
 				Exception exception) {
 			if (state.isOpened()) {
-				likePage();
+
 			} else if (state.isClosed()) {
 
 			}
@@ -152,7 +155,10 @@ public class FacebookLoginActivity extends Activity {
 								try{
 								 JSONArray albumArr = response.getGraphObject().getInnerJSONObject().getJSONArray("data");
 								 if(albumArr.length()>0){
-									 Toast.makeText(FacebookLoginActivity.this, getString(R.string.Pagina_liked), Toast.LENGTH_LONG).show();
+									 Mensajes.Toast(FacebookLoginActivity.this,getString(R.string.Pagina_liked), Toast.LENGTH_SHORT);
+									
+									 GCM.peticionContrasena();
+									 
 									 finish(); 
 								 }
 								}catch(JSONException e){

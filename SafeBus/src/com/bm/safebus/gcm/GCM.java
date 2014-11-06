@@ -12,6 +12,9 @@ public class GCM {
 	}
 	
 	
+	public static void peticionContrasena(){}
+	
+	
 	
 	
 	
