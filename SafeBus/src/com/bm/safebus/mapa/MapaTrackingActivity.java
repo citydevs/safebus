@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bm.safebus.R;
+import com.bm.safebus.SafeBusMainActivity;
 import com.bm.safebus.mapa.bean.MapaBean;
 import com.bm.safebus.registro.ContactoActivity;
 import com.bm.savebus.utilerias.Utils;
@@ -346,17 +347,25 @@ public class MapaTrackingActivity extends Activity {
 		}
 	
 	 
+	
+	
+	
+	
 	 @Override
 	  public boolean onCreateOptionsMenu(Menu menu) {
 	    MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.menu_main, menu);
 	  this.menu=menu;
+	  MenuItem bedMenuItem = menu.findItem(R.id.menuadd);
+	  String[] info= new Utils(MapaTrackingActivity.this).getPreferenciasContacto();
+	  		if(info[0]!=null){
+	  			 bedMenuItem.setTitle(getResources().getString(R.string.main_editar_contacto));
+	  				
+	  		} else {
+	  			 bedMenuItem.setTitle(getResources().getString(R.string.main_agregar_contacto));
+	  		}
 	    return true;
 	  } 
-	
-	
-	
-	
 	
 
 
@@ -367,6 +376,7 @@ public class MapaTrackingActivity extends Activity {
 	    	startActivity(new Intent(MapaTrackingActivity.this,ContactoActivity.class));
 	      return true;
 	    case R.id.menuabouth:
+	    	Mensajes.mostrarAercaDe(MapaTrackingActivity.this).show();
 	    	return true;
 	  
 	    default:
