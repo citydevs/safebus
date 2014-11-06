@@ -53,6 +53,7 @@ En ese grupo podrás compartir mejor tu perspectiva sobre esta campaña y el ser
     <string name="title_activity_reporte">ReporteActivity</string>
     <string name="title_activity_enviar_alarma">EnviarAlarmaActivity</string>
     <string name="alarma_enviando">Enviando alarma.</string>
+    <string name="back_salir">Presiona una vez más para salir</string>
 
     
     <!-- conectar -->
