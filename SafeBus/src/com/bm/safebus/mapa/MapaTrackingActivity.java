@@ -81,7 +81,7 @@ public class MapaTrackingActivity extends Activity {
 		setUpMapIfNeeded();
 		
 		//iniciamos el servicio de localizacion
-		ServicioLocalizacion.activity = MapaTrackingActivity.this;
+		//ServicioLocalizacion.activity = MapaTrackingActivity.this;
 		startService(new Intent(MapaTrackingActivity.this,ServicioLocalizacion.class));
 		
 		ImageView	mapa_iv_back =(ImageView)findViewById(R.id.mapa_iv_back);
