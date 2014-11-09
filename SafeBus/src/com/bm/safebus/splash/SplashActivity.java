@@ -34,13 +34,13 @@ public class SplashActivity extends Activity {
 		setContentView(R.layout.activity_splash);
 		FrameLayout frame_splash = (FrameLayout) findViewById(R.id.frame_splash);
 
-		Point p = Utils.getTamanoPantalla(SplashActivity.this); //tama–o de pantalla
+		Point p = Utils.getTamanoPantalla(SplashActivity.this); //tamaï¿½o de pantalla
 		
 		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(p.x / 2, p.y / 3);
 		lp.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
 		frame_splash.setLayoutParams(lp);
 		
-		if (new Utils(SplashActivity.this).getPreferenciasSplash()) {//si ya se hacepto el tutorial
+		if (new Utils(SplashActivity.this).getPreferenciasGCM()!=null) {//si ya registro
 			init(SafeBusMainActivity.class);
 		} else {
 			init(PaginadorInstrucciones.class);

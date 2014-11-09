@@ -157,7 +157,7 @@ public class FacebookLoginActivity extends Activity {
 								 if(albumArr.length()>0){
 									 Mensajes.Toast(FacebookLoginActivity.this,getString(R.string.Pagina_liked), Toast.LENGTH_SHORT);
 									
-									 GCM.peticionContrasena();
+									// GCM.peticionContrasena();
 									 
 									 finish(); 
 								 }

@@ -5,12 +5,23 @@ import java.io.IOException;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.ParseException;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Point;
@@ -20,28 +31,19 @@ import android.net.NetworkInfo;
 import android.os.StrictMode;
 import android.view.Display;
 
+import com.bm.safebus.R;
+import com.bm.safebus.gcm.UserInfo;
+
 public class Utils {
 
-	Activity activity;
+	 Activity activity;
 
 	public Utils(Activity activity) {
 		this.activity = activity;
 
 	}
 
-	public void setPreferenciasSplash() {
-
-		SharedPreferences prefs = activity.getSharedPreferences("PreferenciasSafeBus", Context.MODE_PRIVATE);
-		SharedPreferences.Editor editor = prefs.edit();
-		editor.putBoolean("splash", true);
-		editor.commit();
-	}
-
-	public boolean getPreferenciasSplash() {
-
-		SharedPreferences prefs = activity.getSharedPreferences("PreferenciasSafeBus", Context.MODE_PRIVATE);
-		return prefs.getBoolean("splash", false);
-	}
+	
 	
 
 	public void setPreferenciasContacto(String[] info) {
@@ -60,6 +62,21 @@ public class Utils {
 		info[0]=prefs.getString("telefono", null);
 		info[1]=prefs.getString("mensaje", null);
 		return info;
+	}
+	
+	
+	public void setPreferenciasGCM(String gcm) {
+
+		SharedPreferences prefs = activity.getSharedPreferences("PreferenciasSafeBus", Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = prefs.edit();
+		editor.putString("gcm", gcm);
+		editor.commit();
+	}
+
+	public String getPreferenciasGCM() {
+
+		SharedPreferences prefs = activity.getSharedPreferences("PreferenciasSafeBus", Context.MODE_PRIVATE);
+		return prefs.getString("gcm", null);
 	}
 	
 	/**
@@ -123,9 +140,56 @@ public class Utils {
 			return null;
 		}
 	}
+	
+	
+	/**
+	 * Regisro de usuario en el servidor
+	 * @param act
+	 * @param url
+	 * @return
+	 */
+	public static boolean doHttpPostAltaUsuario(Activity act,String url){
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+		StrictMode.setThreadPolicy(policy);
+		 HttpParams myParams = new BasicHttpParams();
+		    HttpConnectionParams.setConnectionTimeout(myParams, 10000);
+		    HttpConnectionParams.setSoTimeout(myParams, 10000);
+		    HttpClient httpclient = new DefaultHttpClient(myParams );
+		    try { 
+		    	
+		    JSONObject json = new JSONObject();
+		    JSONObject manJson = new JSONObject();
+		    manJson.put("email", UserInfo.getEmail(act));
+		    manJson.put("reg_id", new Utils(act).getPreferenciasGCM());
+		    manJson.put("device", "android");
+		    json.put("client",manJson);
+		    
+		        HttpPost httppost = new HttpPost(url.toString());
+		        httppost.setHeader("Content-type", "application/json");
+
+		        StringEntity se = new StringEntity(json.toString()); 
+		        se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+		        httppost.setEntity(se); 
+
+		        HttpResponse response = httpclient.execute(httppost);
+		        String temp = EntityUtils.toString(response.getEntity());
+
+		return true;
+		} catch (ClientProtocolException e) {
+		e.printStackTrace();
+		return false;
+		} catch (IOException e) {
+		e.printStackTrace();
+		return false;
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
 
 	/**
-	 * obtienes el tama–o de pantalla
+	 * obtienes el tamaï¿½o de pantalla
 	 * @param (activity) Activity
 	 * @return (Point) .x = width
 	 * 					.y = height 
@@ -139,5 +203,19 @@ public class Utils {
 			return (new Point (width,height));
 		}
 	
+		
+		/**
+		 * dialogo de espera
+		 */
+		public static ProgressDialog anillo(Activity activity, ProgressDialog pDialog){
+			pDialog = new ProgressDialog(activity);
+	 		pDialog.setCanceledOnTouchOutside(false);
+	 		pDialog.setMessage(activity.getString(R.string.espere));
+	 		pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+	 		pDialog.setCancelable(false);
+	 		return pDialog;
+
+		}
+		
 
 }

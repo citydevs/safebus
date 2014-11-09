@@ -58,4 +58,7 @@ En ese grupo podrás compartir mejor tu perspectiva sobre esta campaña y el ser
     
     <!-- conectar -->
     <string name="Pagina_liked">En un momento te enviaremos la contraseña</string>
+    
+      <!-- Esperar -->
+    <string name="espere">espere, por favor ......</string>
 </resources>
