@@ -10,6 +10,7 @@ import android.graphics.Point;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -119,10 +120,12 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 			iniciarActividad(FacebookLoginActivity.class);
 			break;
 		case R.id.safebus_btn_alguien_mas:
-		new MensajeTask().execute(2);
+			//Log.d("***********", "safebus_btn_alguien_mas");
+			new MensajeTask(2).execute();
 			break;
 		case R.id.safebus_btn_yo:
-			new MensajeTask().execute(1);
+			//Log.d("***********", "safebus_btn_yo");
+			new MensajeTask(1).execute();
 			break;
 		case R.id.enviar_alarma_btn_aceptar:
 			customDialog.dismiss();
@@ -237,13 +240,18 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 	private class MensajeTask extends AsyncTask<Integer, Void, Boolean> {
 	    private long time;
 
-	    @Override
+	    public MensajeTask(int i) {
+	    	aviso_a=i;
+		}
+
+		@Override
 	    protected void onPreExecute() {
 	    
 	    	ll_quien.setVisibility(LinearLayout.GONE);
 			ll_enviando_mensaje.setVisibility(LinearLayout.VISIBLE);
 			tv_problemas_titulo.setText("Enviando alarma...");
 			frameAnimation.start();
+			Log.d("********", aviso_a+"");
 			if(aviso_a==2){
 	    		enviarAlarma(ENVIAR_ALARMA_CHOFER);
 	    	}else{
@@ -262,7 +270,7 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 
 	    @Override
 	    protected Boolean doInBackground(Integer... params) {
-	    	aviso_a=params[0];
+	    	
 	    	
 	        try {
 	            Thread.sleep(5000);
