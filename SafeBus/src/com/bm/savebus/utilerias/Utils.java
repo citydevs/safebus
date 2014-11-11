@@ -1,6 +1,8 @@
 package com.bm.savebus.utilerias;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -78,6 +80,26 @@ public class Utils {
 
 		SharedPreferences prefs = activity.getSharedPreferences("PreferenciasSafeBus", Context.MODE_PRIVATE);
 		return prefs.getString("gcm", null);
+	}
+	
+	
+	public void setPreferenciasPlaca(String placa,String calificacion) {
+
+		SharedPreferences prefs = activity.getSharedPreferences("PreferenciasSafeBus", Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = prefs.edit();
+		editor.putString("placa", placa);
+		editor.putString("fecha_bus", getFechaHoy()+"");
+		editor.putString("calificacion", calificacion);
+		editor.commit();
+	}
+
+	public String[] getPreferenciasPlaca() {
+		String[] info = new String[3];
+		SharedPreferences prefs = activity.getSharedPreferences("PreferenciasSafeBus", Context.MODE_PRIVATE);
+		info[0]=prefs.getString("placa", null);
+		info[1]=prefs.getString("calificacion", null);
+		info[2]=prefs.getString("fecha_bus", "0");
+		return  info;
 	}
 	
 	/**
@@ -192,6 +214,27 @@ public class Utils {
 		
 	}
 
+	
+	
+	/**
+	 * Envia calificacion de viaje anterior
+	 * @param act
+	 * @param calif
+	 * @param comentario
+	 * @return
+	 */
+	public static boolean doHttpPostCalificacionUsuario(Activity act,String calif, String comentario){
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+		StrictMode.setThreadPolicy(policy);
+		 HttpParams myParams = new BasicHttpParams();
+		    HttpConnectionParams.setConnectionTimeout(myParams, 10000);
+		    HttpConnectionParams.setSoTimeout(myParams, 10000);
+		    HttpClient httpclient = new DefaultHttpClient(myParams );
+			return true;
+		  
+		
+	}
+	
 	/**
 	 * obtienes el tama�o de pantalla
 	 * @param (activity) Activity
@@ -221,5 +264,24 @@ public class Utils {
 
 		}
 		
-
+		/**
+		 * obtener los milisegundos de una fecha
+		 * 
+		 * @return
+		 */
+		public static long getFechaHoy() {
+			Calendar now = Calendar.getInstance();
+			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+			String fechaCel = now.get(Calendar.DAY_OF_MONTH) + "/"
+					+ ((now.get(Calendar.MONTH)) + 1) + "/"
+					+ now.get(Calendar.YEAR) + " " + now.get(Calendar.HOUR_OF_DAY)
+					+ ":" + now.get(Calendar.MINUTE) + ":"
+					+ now.get(Calendar.SECOND);
+			try {
+				return (formatter.parse(fechaCel)).getTime();
+			} catch (java.text.ParseException e) {
+				e.printStackTrace();
+				return 0;
+			}
+		}
 }

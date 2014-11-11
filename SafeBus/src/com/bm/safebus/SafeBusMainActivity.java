@@ -1,33 +1,46 @@
 package com.bm.safebus;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Point;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
+import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bm.safebus.facebook.FacebookLoginActivity;
+import com.bm.safebus.gcm.UserInfo;
 import com.bm.safebus.mapa.MapaTrackingActivity;
 import com.bm.safebus.panico.PanicAlert;
 import com.bm.safebus.registro.ContactoActivity;
 import com.bm.savebus.utilerias.Utils;
-import com.facebook.Session;
 import com.mikesaurio.mensajesydialogos.Mensajes;
 
 /**
@@ -53,6 +66,11 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 	private static final int ENVIAR_ALARMA_CHOFER=0;
 	private static final int ENVIAR_ALARMA_FAMILIAR_CHOFER=1;
 	String[] info;
+	
+	//dialogo
+	TextView dialogo_califica_tv_caracteres;
+	String Scalificacion;
+	EditText comentario;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -113,19 +131,44 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 			break;
 
 		case R.id.safebus_btn_reporta:
-			showDialogQuienTieneProblemas().show();
+			if((new Utils(SafeBusMainActivity.this).getPreferenciasPlaca()[0])!=null){
+				long tiempo =Long.parseLong(new Utils(SafeBusMainActivity.this).getPreferenciasPlaca()[2]);
+				if((tiempo+7200000)>Utils.getFechaHoy()){
+					showDialogQuienTieneProblemas().show();
+				}else{
+					new Utils(SafeBusMainActivity.this).setPreferenciasPlaca(null,new Utils(SafeBusMainActivity.this).getPreferenciasPlaca()[1]);
+					showDialogPlaca().show();
+				}
+				
+			}else{
+				showDialogPlaca().show();
+			}
+			
 			break;
 
 		case R.id.safebus_btn_conecta:
-			iniciarActividad(FacebookLoginActivity.class);
+			if((new Utils(SafeBusMainActivity.this).getPreferenciasPlaca()[0])!=null){
+				long tiempo =Long.parseLong(new Utils(SafeBusMainActivity.this).getPreferenciasPlaca()[2]);
+				if((tiempo+7200000)>Utils.getFechaHoy()){
+					iniciarActividad(FacebookLoginActivity.class);
+				}else{
+					if((new Utils(SafeBusMainActivity.this).getPreferenciasPlaca()[1])==null){
+						showDialogCalificaBus().show();
+					}else{
+						new Utils(SafeBusMainActivity.this).setPreferenciasPlaca(null,null);
+						showDialogPlaca().show();
+					}
+				}
+			}else{
+				showDialogPlaca().show();
+			}
+			
 			break;
 		case R.id.safebus_btn_alguien_mas:
-			//Log.d("***********", "safebus_btn_alguien_mas");
-			new MensajeTask(2).execute();
+				new MensajeTask(2).execute();
 			break;
 		case R.id.safebus_btn_yo:
-			//Log.d("***********", "safebus_btn_yo");
-			new MensajeTask(1).execute();
+				showDialogPlaca().show();
 			break;
 		case R.id.enviar_alarma_btn_aceptar:
 			customDialog.dismiss();
@@ -135,6 +178,8 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 		}
 
 	}
+
+	
 
 	
 
@@ -254,7 +299,6 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 			if(aviso_a==2){
 	    		enviarAlarma(ENVIAR_ALARMA_CHOFER);
 	    	}else{
-	    		
 		  		if(info[0]!=null){
 		    		enviarAlarma(ENVIAR_ALARMA_FAMILIAR_CHOFER);
 		  				
@@ -272,8 +316,9 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 	    	
 	    	
 	        try {
-	           // Thread.sleep(5000);
-	        	Utils.doHttpConnection("https://cryptic-peak-2139.herokuapp.com/api/client_panic?email=mikesaurio@gmail.com&placa=123456");
+	        	Utils.doHttpConnection("https://cryptic-peak-2139.herokuapp.com/api/client_panic?email="
+	        			+UserInfo.getEmail(SafeBusMainActivity.this)
+	        			+"&placa="+new Utils(SafeBusMainActivity.this).getPreferenciasPlaca()[0]);
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
@@ -353,6 +398,134 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 
 		return (customDialog = builder.create());
 	}
+	
+	
+	
+	
+	public AlertDialog showDialogPlaca() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		View view = getLayoutInflater()	.inflate(R.layout.dialogo_placa, null);
+		builder.setView(view);
+		builder.setCancelable(true);
+		
+		final EditText dialogo_placa_et_placa = (EditText)view.findViewById(R.id.dialogo_placa_et_placa);
+		Button dialogo_placa_btn_aceptar=(Button)view.findViewById(R.id.dialogo_placa_btn_aceptar);
+		dialogo_placa_btn_aceptar.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(!dialogo_placa_et_placa.getText().toString().equals("")){
+					new Utils(SafeBusMainActivity.this).setPreferenciasPlaca(dialogo_placa_et_placa.getText().toString(),null);
+					InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+					imm.hideSoftInputFromWindow(dialogo_placa_et_placa.getWindowToken(), 0);
+					customDialog.dismiss();
+				}else{
+					dialogo_placa_et_placa.setError(getString(R.string.ruta_registro_vacio));
+				}
+				
+			}
+		});
+		
+		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.showSoftInput(dialogo_placa_et_placa, InputMethodManager.SHOW_IMPLICIT);	
+
+		return (customDialog = builder.create());
+	}
+	
+	
+	public AlertDialog showDialogCalificaBus() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		View view = getLayoutInflater()	.inflate(R.layout.dialogo_califica, null);
+		builder.setView(view);
+		builder.setCancelable(true);
+
+		
+		 dialogo_califica_tv_caracteres =(TextView)view.findViewById(R.id.dialogo_califica_tv_caracteres);
+		
+	final	 TextView califica_taxi_tv_titulo_calif =(TextView)view.findViewById(R.id.califica_taxi_tv_titulo_calif);
+		 
+		
+		
+		 comentario = (EditText)view.findViewById(R.id.dialogo_califica_servicio_et_comentario);
+		comentario.addTextChangedListener(mTextEditorWatcher);
+		
+		RatingBar	rank = (RatingBar)view.findViewById(R.id.dialogo_califica_servicio_ratingBarServicio);
+		rank.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
+			
+			public void onRatingChanged(RatingBar ratingBar, float rating,boolean fromUser) {
+				Scalificacion = (String.valueOf(rating));
+				if(rating==0.0){
+					califica_taxi_tv_titulo_calif.setText(getResources().getString(R.string.Califica_taxi_0));
+				}
+				if(rating==0.5){
+					califica_taxi_tv_titulo_calif.setText(getResources().getString(R.string.Califica_taxi_05));
+				}
+				if(rating==1.0){
+					califica_taxi_tv_titulo_calif.setText(getResources().getString(R.string.Califica_taxi_10));
+				}
+				if(rating==1.5){
+					califica_taxi_tv_titulo_calif.setText(getResources().getString(R.string.Califica_taxi_15));
+				}
+				if(rating==2.0){
+					califica_taxi_tv_titulo_calif.setText(getResources().getString(R.string.Califica_taxi_20));
+				}
+				if(rating==2.5){
+					califica_taxi_tv_titulo_calif.setText(getResources().getString(R.string.Califica_taxi_25));
+				}
+				if(rating==3.0){
+					califica_taxi_tv_titulo_calif.setText(getResources().getString(R.string.Califica_taxi_30));
+				}
+				if(rating==3.5){
+					califica_taxi_tv_titulo_calif.setText(getResources().getString(R.string.Califica_taxi_35));
+				}
+				if(rating==4.0){
+					califica_taxi_tv_titulo_calif.setText(getResources().getString(R.string.Califica_taxi_40));
+				}
+				if(rating==4.5){
+					califica_taxi_tv_titulo_calif.setText(getResources().getString(R.string.Califica_taxi_45));
+				}
+				if(rating==5.0){
+					califica_taxi_tv_titulo_calif.setText(getResources().getString(R.string.Califica_taxi_50));
+				}
+			}
+
+			
+		});
+		
+		Button calificar_aceptar =(Button)view.findViewById(R.id.dialogo_califica_servicio_btnAceptar);
+		calificar_aceptar.setOnClickListener(new View.OnClickListener() {
+		
+			@Override
+			public void onClick(View v) {
+				Utils util = new Utils(SafeBusMainActivity.this);
+				
+				util.setPreferenciasPlaca(util.getPreferenciasPlaca()[0], Scalificacion);
+				
+				Utils.doHttpPostCalificacionUsuario(SafeBusMainActivity.this, Scalificacion, comentario.getText().toString());
+				
+				customDialog.dismiss();
+			}
+		});
+			
+
+		return (customDialog = builder.create());
+	}
+	
+	/**
+	 * escucha para saber cuantos caracteres quedan al dejar un comentario
+	 */
+	private final TextWatcher mTextEditorWatcher = new TextWatcher() {
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+        	dialogo_califica_tv_caracteres.setText(String.valueOf(s.length()+"/50"));
+        }
+
+        public void afterTextChanged(Editable s) {
+        }
+};
+
 	
 	
 }

@@ -10,6 +10,12 @@
     <string name="instrucciones_contacto">Si en algún momento te sientes inseguro o agredido, puedes apretar el botón de REPORTA y se mandará una notificación al chofer y al contacto que elijas en este momento.</string>
     <string name="mensaje_emergencia">Marcame en cuanto puedas a mi celular</string>
     <string name="mensaje_emergencia_hint">Agrega mensaje de emergencia</string>
+    
+    
+    <!-- panico -->
+    <string name="ingresa_placa">Ingresa la placa del Bus</string>
+    <string name="texto_placa">Placa</string>
+     <string name="ruta_registro_vacio">Debes poner la placa</string>
 
     <!-- Mapa -->
     <string name="mapa_espera">¡Espera! te estamos localizando</string>
@@ -61,4 +67,23 @@ En ese grupo podrás compartir mejor tu perspectiva sobre esta campaña y el ser
     
       <!-- Esperar -->
     <string name="espere">espere, por favor ......</string>
+    
+    
+    <!-- Califica bus -->
+    <string name="califica_bus_tv_titulo_calif">¿Qué te pareció el viaje en el bus?</string>
+    <string name="califica_bus_btn_aceptar">Aceptar</string>
+     <string name="califica_bus_et_comentario">Comentario</string>
+     <string name="Califica_taxi_0">Muy deficiente servicio</string>
+    <string name="Califica_taxi_05">Deficiente servicio</string>
+    <string name="Califica_taxi_10">Muy mal servicio</string>
+    <string name="Califica_taxi_15">Mal servicio</string>
+    <string name="Califica_taxi_20">Servicio regular malo</string>
+    <string name="Califica_taxi_25">Servicio regular</string>
+    <string name="Califica_taxi_30">Servicio regular bueno</string>
+    <string name="Califica_taxi_35">Buen servicio</string>
+    <string name="Califica_taxi_40">Muy buen servicio</string>
+    <string name="Califica_taxi_45">Excelente servicio</string>
+    <string name="Califica_taxi_50">Servicio insuperable</string>
+    
+    
 </resources>
