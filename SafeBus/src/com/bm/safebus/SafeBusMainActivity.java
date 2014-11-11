@@ -168,7 +168,7 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 				new MensajeTask(2).execute();
 			break;
 		case R.id.safebus_btn_yo:
-				showDialogPlaca().show();
+				new MensajeTask(1).execute();
 			break;
 		case R.id.enviar_alarma_btn_aceptar:
 			customDialog.dismiss();
