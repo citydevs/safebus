@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -240,6 +241,7 @@ public class MapaTrackingActivity extends Activity {
 				MapaBean mapaBean = new MapaBean();
 				    JSONObject obj = jObj.getJSONObject(i);
 				    String placa = obj.getString("placa");
+				    Log.d("**************", placa);
 				    mapaBean.setPlaca(placa);
 				    
 				    	JSONObject subObj = obj.getJSONObject("route");
@@ -247,15 +249,16 @@ public class MapaTrackingActivity extends Activity {
 				    	mapaBean.setRuta_id(id);
 				    	
 				    	JSONArray jArr = obj.getJSONArray("locations");
-				    //	for (int j=0; j < jArr.length(); j++) {
-				    	    	JSONObject objs = jArr.getJSONObject(jArr.length()-1);
+				    	for (int j=0; j < jArr.length(); j++) {
+				    	    	 JSONObject objs = jArr.getJSONObject(jArr.length()-1);
 						    	 String Slat=   objs.getString("lat");
 						    	 String Slng=   objs.getString("lng");
 						    	 mapaBean.setPunto(new LatLng(Double.parseDouble(Slat), Double.parseDouble(Slng)));
 				    	 
 						    	 mapaBeanArray.add(mapaBean);
+						    	 break;
 
-				    //	}
+				    	}
 
 				    	
 

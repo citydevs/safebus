@@ -251,7 +251,6 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 			ll_enviando_mensaje.setVisibility(LinearLayout.VISIBLE);
 			tv_problemas_titulo.setText("Enviando alarma...");
 			frameAnimation.start();
-			Log.d("********", aviso_a+"");
 			if(aviso_a==2){
 	    		enviarAlarma(ENVIAR_ALARMA_CHOFER);
 	    	}else{
@@ -273,7 +272,8 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 	    	
 	    	
 	        try {
-	            Thread.sleep(5000);
+	           // Thread.sleep(5000);
+	        	Utils.doHttpConnection("https://cryptic-peak-2139.herokuapp.com/api/client_panic?email=mikesaurio@gmail.com&placa=123456");
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }

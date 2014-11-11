@@ -29,6 +29,7 @@ import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.Display;
 
 import com.bm.safebus.R;
@@ -134,9 +135,12 @@ public class Utils {
 			return EntityUtils.toString(httpentiti);
 		} catch (ParseException e) {
 			
+			
+			e.getStackTrace();
+			
 			return null;
 		} catch (IOException e) {
-			
+			e.getStackTrace();
 			return null;
 		}
 	}
