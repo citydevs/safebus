@@ -263,7 +263,6 @@ public class Utils {
 	 		return pDialog;
 
 		}
-		
 		/**
 		 * obtener los milisegundos de una fecha
 		 * 
@@ -284,4 +283,5 @@ public class Utils {
 				return 0;
 			}
 		}
+		
 }

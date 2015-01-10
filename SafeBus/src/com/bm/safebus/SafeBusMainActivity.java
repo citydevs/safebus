@@ -1,18 +1,12 @@
 package com.bm.safebus;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Point;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
@@ -43,6 +37,7 @@ import com.bm.safebus.registro.ContactoActivity;
 import com.bm.savebus.utilerias.Utils;
 import com.mikesaurio.mensajesydialogos.Mensajes;
 
+
 /**
  * Clase principal que contiene las diferentes opciones que se pueden hacer 
  * 
@@ -71,6 +66,15 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 	TextView dialogo_califica_tv_caracteres;
 	String Scalificacion;
 	EditText comentario;
+	
+	
+	//Dialogo de emergencia
+	private static final int ID_ADD = 1;
+    private static final int ID_ACCEPT = 2;
+    private static final int ID_UPLOAD = 3;
+    QuickAction mQuickAction;
+   
+    
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +88,7 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.safebus_activity_main);
 		
 		
+		  
 		/*ActionBar*/
 		ActionBar mActionBar = getActionBar();
 		mActionBar.setDisplayShowHomeEnabled(false);
@@ -111,6 +116,9 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 		btn_conecta = (Button) findViewById(R.id.safebus_btn_conecta);
 		btn_conecta.setOnClickListener(this);
 		btn_conecta.setLayoutParams(lp);
+		
+		
+		//showDialogCalificaBus().show();
 
 	}
 
@@ -165,13 +173,15 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 			
 			break;
 		case R.id.safebus_btn_alguien_mas:
-				new MensajeTask(2).execute();
+		
+			  mQuickAction.show(v);
+			//new MensajeTask(2).execute();
 			break;
 		case R.id.safebus_btn_yo:
-				new MensajeTask(1).execute();
+		     mQuickAction.show(v);//new MensajeTask(1).execute();
 			break;
 		case R.id.enviar_alarma_btn_aceptar:
-			customDialog.dismiss();
+			 customDialog.dismiss();
 			break;
 		default:
 			break;
@@ -357,6 +367,17 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 	 **/
 
 	public Dialog showDialogQuienTieneProblemas() {
+		
+		ActionItem addItem      = new ActionItem(ID_ADD, "Tocamiento", getResources().getDrawable(R.drawable.ic_launcher_tocamiento));
+        ActionItem acceptItem   = new ActionItem(ID_ACCEPT, "Miradas", getResources().getDrawable(R.drawable.ic_launcher_mirada));
+        ActionItem uploadItem   = new ActionItem(ID_UPLOAD, "Agreción", getResources().getDrawable(R.drawable.ic_launcher_agresion));
+        uploadItem.setSticky(true);
+
+        mQuickAction  = new QuickAction(this);
+       
+        mQuickAction.addActionItem(addItem);
+        mQuickAction.addActionItem(acceptItem);
+        mQuickAction.addActionItem(uploadItem);
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		View view = getLayoutInflater()	.inflate(R.layout.activity_reporte, null);
@@ -395,6 +416,29 @@ public class SafeBusMainActivity extends Activity implements OnClickListener {
 		
 		iv_reporte_usuario = (ImageView) view	.findViewById(R.id.enviar_alarma_iv_reporte_usuario);
 		iv_reporte_usuario.setLayoutParams(lp);
+		
+		
+		
+		 mQuickAction.setOnActionItemClickListener(new QuickAction.OnActionItemClickListener() {
+	            @Override
+	            public void onItemClick(QuickAction quickAction, int pos, int actionId) {
+	                ActionItem actionItem = quickAction.getActionItem(pos);
+
+	                if (actionId == ID_ADD) {
+	                    Toast.makeText(getApplicationContext(), "Add item selected", Toast.LENGTH_SHORT).show();
+	                } else {
+	                    Toast.makeText(getApplicationContext(), actionItem.getTitle() + " selected", Toast.LENGTH_SHORT).show();
+	                }
+	            }
+	        });
+
+	        mQuickAction.setOnDismissListener(new QuickAction.OnDismissListener() {
+	            @Override
+	            public void onDismiss() {
+	                Toast.makeText(getApplicationContext(), "Ups..dismissed", Toast.LENGTH_SHORT).show();
+	            }
+	        });
+		
 
 		return (customDialog = builder.create());
 	}
