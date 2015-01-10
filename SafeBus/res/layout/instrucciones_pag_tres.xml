@@ -16,9 +16,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:text="@string/paginas_instrucciones_titulo_3" 
             android:layout_marginBottom="10dp"
-            android:textStyle="bold"/>
+            android:text="@string/paginas_instrucciones_titulo_3"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
@@ -31,9 +31,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:textColor="@color/color_vivos"
-            android:text="@string/tel_inmujeres" />
-        
+            android:text="@string/tel_inmujeres"
+            android:textColor="@color/color_vivos" />
+
+        <ImageView
+            android:id="@+id/instrucciones_pag_3_im_inmujer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/inmujer" />
     </LinearLayout>
 
 </LinearLayout>
