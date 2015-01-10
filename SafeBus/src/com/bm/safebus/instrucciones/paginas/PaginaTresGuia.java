@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.bm.safebus.R;
+import com.bm.savebus.utilerias.Fonts;
 
 /**
  * pagina que muestra en una lista los adeudos de un carro con las secretarias
@@ -55,7 +56,12 @@ public class PaginaTresGuia extends View  {
 		LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		view = inflater.inflate(R.layout.instrucciones_pag_tres, null);
 		
+		((TextView)view.findViewById(R.id.instrucciones_pag_3_tv_titulo)).setTypeface(new Fonts(context).getTypeFace(Fonts.FLAG_BLACK));
+		((TextView)view.findViewById(R.id.instrucciones_pag_3_tv_contenido)).setTypeface(new Fonts(context).getTypeFace(Fonts.FLAG_LIGHT));
+		
 		final TextView instrucciones_pag_3_tv_tel_inmujeres = (TextView)view.findViewById(R.id.instrucciones_pag_3_tv_tel_inmujeres);
+		instrucciones_pag_3_tv_tel_inmujeres.setTypeface(new Fonts(context).getTypeFace(Fonts.FLAG_BLACK));
+		
 		instrucciones_pag_3_tv_tel_inmujeres.setOnClickListener(new View.OnClickListener() {
 			
 			@Override

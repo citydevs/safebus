@@ -42,8 +42,8 @@ En ese grupo podrás compartir mejor tu perspectiva sobre esta campaña y el ser
     
     
     <!-- Pagina 3 -->
-    <string name="paginas_instrucciones_titulo_3">En caso de violencia contra la mujer</string>
-    <string name="paginas_instrucciones_texto_pag_3">Recuerda que cuentas con el apoyo de InMujer en caso de que seas victima de algun delito sexual en el transporte público o veas alguno\n ¡por favor reporta cualquier abuso!\n\nLlama al:</string>
+    <string name="paginas_instrucciones_titulo_3">Contra la violencia</string>
+    <string name="paginas_instrucciones_texto_pag_3">Recuerda que cuentas con el apoyo de InMujer en caso de que seas victima de algun delito sexual y/o cualquier tipo de VIOLENCIA DE GENERO en el transporte público o veas alguno\n ¡por favor reporta cualquier abuso!\n\nLlama al:</string>
     <string name="tel_inmujeres">52009632</string>
 
     <!-- Registro -->
