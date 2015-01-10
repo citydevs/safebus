@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bm.safebus.R;
 import com.bm.safebus.instrucciones.paginas.PaginaDosGuia;
+import com.bm.safebus.instrucciones.paginas.PaginaTresGuia;
 import com.bm.safebus.instrucciones.paginas.PaginaUnoGuia;
 
 /**
@@ -80,7 +81,12 @@ public class ScreenSlidePageFragmentDialog extends Fragment   {
 			PaginaDosGuia paginaDosGuia=new PaginaDosGuia(actividad);
 			paginaDosGuia.init();
 			return paginaDosGuia.getView();
-		}else{
+		}else if(index==3){
+			PaginaTresGuia paginaTresGuia=new PaginaTresGuia(actividad);
+			paginaTresGuia.init();
+			return paginaTresGuia.getView();
+		}
+		else{
 			ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_screen_slide_page, container, false);
 			TextView tvIndex = (TextView) rootView.findViewById(R.id.tvIndex);
 			tvIndex.setText(getResources().getString(R.string.app_name));
