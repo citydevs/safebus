@@ -100,6 +100,8 @@ public class PaginadorInstrucciones extends FragmentActivity  implements OnListe
 		case R.id.instrucciones_btn_siguiente:
 			if(PaginadorInstrucciones.this.pager.getCurrentItem()==0){
 				PaginadorInstrucciones.this.pager.setCurrentItem(1);
+			}else if(PaginadorInstrucciones.this.pager.getCurrentItem()==1){
+				PaginadorInstrucciones.this.pager.setCurrentItem(2);
 			}else{
 				//activar GSM 
 				 mGCM= new GCM(PaginadorInstrucciones.this);

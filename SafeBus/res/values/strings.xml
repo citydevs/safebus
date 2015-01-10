@@ -23,7 +23,7 @@
 
     <!-- Pagina 2 -->
     <string name="paginas_instrucciones_texto_pag_2_1">Da click en el botón “+” para AGREGAR un contacto para notificaciones.</string>
-    <string name="paginas_instrucciones_texto_pag_2_2">Si no quieres agregarlo, da click en Entiendo.</string>
+    <string name="paginas_instrucciones_texto_pag_2_2">Si no quieres agregarlo ahora, podras hacerlo en cualquier momento despues.</string>
     <string name="paginas_instrucciones_texto_pag_2_1_listo">Da click en el botón “+” para EDITAR tu contacto de notificaciones.</string>
     <string name="paginas_instrucciones_texto_pag_2_2_listo">Para finalizar, da click en Entiendo.</string>
     <string name="paginas_instrucciones_texto_pag_2_3">Recuerda, siempre puedes ir a las configuraciones y agregar o editar tu contacto. </string>
