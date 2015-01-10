@@ -9,50 +9,65 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_weight="1"
+        android:layout_weight=".7"
+        android:gravity="center"
         android:orientation="vertical"
         android:padding="25dp" >
 
-        <TextView
-            android:id="@+id/instrucciones_p2_tv_titulo"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/paginas_instrucciones_texto_pag_2_1" />
-
-        <ImageView
-            android:id="@+id/instrucciones_iv_mas"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:background="@drawable/boton_mas_selector" />
+            android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/instrucciones_p2_tv_da_click"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/paginas_instrucciones_texto_pag_2_2" />
+            <TextView
+                android:id="@+id/instrucciones_p2_tv_titulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/paginas_instrucciones_texto_pag_2_1"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/instrucciones_iv_mas"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:background="@drawable/boton_mas_selector" />
+
+            <TextView
+                android:id="@+id/instrucciones_p2_tv_da_click"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/paginas_instrucciones_texto_pag_2_2"
+                android:textSize="16sp" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp" 
-        android:layout_marginBottom="25dp">
+        android:layout_height="0dp"
+        android:layout_weight=".3"
+        android:layout_marginBottom="25dp"
+        android:gravity="center"
+        android:paddingTop="10dp" >
 
         <ImageView
             android:id="@+id/imageView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="fitStart"
+            android:layout_gravity="center"
             android:src="@drawable/ic_launcher_saefubus_banderilla" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/instrucciones_p2_tv_pie"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center|left"
-            android:text="@string/paginas_instrucciones_texto_pag_2_3" />
+            android:paddingRight="5dp"
+            android:text="@string/paginas_instrucciones_texto_pag_2_3"
+            android:textSize="16sp" />
     </LinearLayout>
 
 </LinearLayout>

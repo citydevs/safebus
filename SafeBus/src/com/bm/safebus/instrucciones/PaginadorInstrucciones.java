@@ -64,9 +64,9 @@ public class PaginadorInstrucciones extends FragmentActivity  implements OnListe
 		
 		/*Creamos las paginas*/
 		FragmentPagerAdapterDialog adapter = new FragmentPagerAdapterDialog(getSupportFragmentManager());
-		ScreenSlidePageFragmentDialog fragment = ScreenSlidePageFragmentDialog.newInstance(getResources().getColor(R.color.android_blue), 1,PaginadorInstrucciones.this);
-		adapter.addFragment(fragment);
+		adapter.addFragment(ScreenSlidePageFragmentDialog.newInstance(getResources().getColor(R.color.android_blue), 1,PaginadorInstrucciones.this));
 		adapter.addFragment(ScreenSlidePageFragmentDialog.newInstance(getResources().getColor(R.color.android_red), 2,PaginadorInstrucciones.this));
+		adapter.addFragment(ScreenSlidePageFragmentDialog.newInstance(getResources().getColor(R.color.android_red), 3,PaginadorInstrucciones.this));
 		
 		
 		PaginaDosGuia.setOnClickSiguienteListener( this ); //escucha del boton siguiente
@@ -76,7 +76,7 @@ public class PaginadorInstrucciones extends FragmentActivity  implements OnListe
 		
 		
 		btn_siguiente =(ImageView)findViewById(R.id.instrucciones_btn_siguiente); 
-		Point p = Utils.getTamanoPantalla(PaginadorInstrucciones.this); //tamaño de pantalla
+		Point p = Utils.getTamanoPantalla(PaginadorInstrucciones.this); //tama��o de pantalla
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(p.x / 2, p.y / 3);
 		btn_siguiente.setLayoutParams(lp);
 		btn_siguiente.setOnClickListener(this);	
@@ -100,6 +100,8 @@ public class PaginadorInstrucciones extends FragmentActivity  implements OnListe
 		case R.id.instrucciones_btn_siguiente:
 			if(PaginadorInstrucciones.this.pager.getCurrentItem()==0){
 				PaginadorInstrucciones.this.pager.setCurrentItem(1);
+			}else if(PaginadorInstrucciones.this.pager.getCurrentItem()==1){
+				PaginadorInstrucciones.this.pager.setCurrentItem(2);
 			}else{
 				//activar GSM 
 				 mGCM= new GCM(PaginadorInstrucciones.this);
@@ -123,9 +125,9 @@ public class PaginadorInstrucciones extends FragmentActivity  implements OnListe
 	@Override
 	public void onPageSelected(int index) {
 
-		if(index==0){
+		if(index==0|| index == 1){
 			btn_siguiente.setImageResource(R.drawable.boton_siguiente_selector);
-		}else if(index==1){
+		}else if(index==2){
 			btn_siguiente.setImageResource(R.drawable.boton_entiendo_selector);
 		}
 	}

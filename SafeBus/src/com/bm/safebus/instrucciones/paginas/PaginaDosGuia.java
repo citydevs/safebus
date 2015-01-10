@@ -13,6 +13,7 @@ import com.bm.safebus.R;
 import com.bm.safebus.instrucciones.PaginadorInstrucciones;
 import com.bm.safebus.instrucciones.PaginadorInstrucciones.OnListenerCambiarTexto;
 import com.bm.safebus.registro.ContactoActivity;
+import com.bm.savebus.utilerias.Fonts;
 import com.bm.savebus.utilerias.Utils;
 
 /**
@@ -28,7 +29,7 @@ public class PaginaDosGuia extends View implements OnListenerCambiarTexto {
 	private View view;
 	private Activity context;
 	private static OnListenerMas onListenerMas;
-	private TextView p2_tv_titulo,p2_tv_da_click;
+	private TextView p2_tv_titulo,p2_tv_da_click,p2_tv_pie;
 	
 	
 	public PaginaDosGuia(Activity context) {
@@ -63,7 +64,14 @@ public class PaginaDosGuia extends View implements OnListenerCambiarTexto {
 		PaginadorInstrucciones.setOnClickCambiarTextoListener(this); //escucha del cambio de texto
 		
 		p2_tv_titulo =(TextView)view.findViewById(R.id.instrucciones_p2_tv_titulo);
+		p2_tv_titulo.setTypeface(new Fonts(context).getTypeFace(Fonts.FLAG_LIGHT));
+		
 		p2_tv_da_click =(TextView)view.findViewById(R.id.instrucciones_p2_tv_da_click);
+		p2_tv_da_click.setTypeface(new Fonts(context).getTypeFace(Fonts.FLAG_LIGHT));
+		
+		p2_tv_pie =(TextView)view.findViewById(R.id.instrucciones_p2_tv_pie);
+		p2_tv_pie.setTypeface(new Fonts(context).getTypeFace(Fonts.FLAG_BLACK));
+		
 		
 		String[] info= new Utils(context).getPreferenciasContacto();
 		if(info[0]!=null){

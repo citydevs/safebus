@@ -6,8 +6,10 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import com.bm.safebus.R;
+import com.bm.savebus.utilerias.Fonts;
 
 /**
  * pagina que muestra en una lista los adeudos de un carro con las secretarias
@@ -54,7 +56,8 @@ public class PaginaUnoGuia extends View {
 		LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		view = inflater.inflate(R.layout.instrucciones_pag_uno, null);
 		
-		
+		((TextView)view.findViewById(R.id.instrucciones_pag_1_tv_titulo)).setTypeface(new Fonts(context).getTypeFace(Fonts.FLAG_BLACK));
+		((TextView)view.findViewById(R.id.instrucciones_pag_1_tv_contenido)).setTypeface(new Fonts(context).getTypeFace(Fonts.FLAG_LIGHT));
 		
 	
 		
