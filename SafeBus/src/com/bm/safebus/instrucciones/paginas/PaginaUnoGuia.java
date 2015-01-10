@@ -57,7 +57,7 @@ public class PaginaUnoGuia extends View {
 		view = inflater.inflate(R.layout.instrucciones_pag_uno, null);
 		
 		((TextView)view.findViewById(R.id.instrucciones_pag_1_tv_titulo)).setTypeface(new Fonts(context).getTypeFace(Fonts.FLAG_BLACK));
-		((TextView)view.findViewById(R.id.instrucciones_pag_1_tv_contenido)).setTypeface(new Fonts(context).getTypeFace(Fonts.FLAG_THIN));
+		((TextView)view.findViewById(R.id.instrucciones_pag_1_tv_contenido)).setTypeface(new Fonts(context).getTypeFace(Fonts.FLAG_LIGHT));
 		
 	
 		

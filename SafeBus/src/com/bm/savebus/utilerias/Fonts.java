@@ -3,10 +3,16 @@ package com.bm.savebus.utilerias;
 import android.content.Context;
 import android.graphics.Typeface;
 
+
+/**
+ * Clase que controla las tipografias
+ * @author mikesaurio
+ *
+ */
 public class Fonts {
 
 	public static final int FLAG_BLACK = 1;
-	public static final int FLAG_THIN = 3;
+	public static final int FLAG_LIGHT = 3;
 
 
 	private static Context activity;
@@ -25,9 +31,9 @@ public class Fonts {
 		if (tipo == FLAG_BLACK) {
 			tf = Typeface.createFromAsset(activity.getAssets(),
 					"fonts/Lato-Black.ttf");
-		}else if (tipo == FLAG_THIN) {
+		}else if (tipo == FLAG_LIGHT) {
 			tf = Typeface.createFromAsset(activity.getAssets(),
-					"fonts/Lato-Thin.ttf");
+					"fonts/Lato-Light.ttf");
 		}
 		return tf;
 	}
