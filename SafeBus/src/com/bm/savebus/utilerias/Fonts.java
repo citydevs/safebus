@@ -30,10 +30,10 @@ public class Fonts {
 		Typeface tf = null;
 		if (tipo == FLAG_BLACK) {
 			tf = Typeface.createFromAsset(activity.getAssets(),
-					"fonts/Lato-Black.ttf");
+					"fonts/Lato-Bold.ttf");
 		}else if (tipo == FLAG_LIGHT) {
 			tf = Typeface.createFromAsset(activity.getAssets(),
-					"fonts/Lato-Light.ttf");
+					"fonts/Lato-Regular.ttf");
 		}
 		return tf;
 	}
