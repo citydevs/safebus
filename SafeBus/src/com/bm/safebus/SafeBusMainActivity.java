@@ -36,7 +36,6 @@ public class SafeBusMainActivity extends ActionBarActivity {
 	private DrawerLayout drawerLayout;
 	private ListView navList;
 	private  CustomList adapter;
-	private int position=0;
 
 	private ActionBarDrawerToggle drawerToggle;
 	private SafeBusDashboardFragment fragment;
@@ -52,7 +51,7 @@ public class SafeBusMainActivity extends ActionBarActivity {
 		
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setHomeButtonEnabled(true);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
+		getSupportActionBar().setDisplayShowHomeEnabled(true);
 		
 		getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.marco));
 		LayoutInflater mInflater = LayoutInflater.from(this);
@@ -70,7 +69,7 @@ public class SafeBusMainActivity extends ActionBarActivity {
 		navList.setAdapter(adapter);
 		navList.setOnItemClickListener(new DrawerItemClickListener());
 		
-		drawerToggle = new ActionBarDrawerToggle(this, drawerLayout,R.drawable.ic_launcher_logo, R.string.app_name,R.string.app_name) {
+		drawerToggle = new ActionBarDrawerToggle(this, drawerLayout,R.drawable.ic_launcher_menu, R.string.app_name,R.string.app_name) {
 			public void onDrawerClosed(View view) {
 				supportInvalidateOptionsMenu();
 			}
@@ -135,7 +134,6 @@ public class SafeBusMainActivity extends ActionBarActivity {
 	 */
 	private void selectItem(int position) {
 		
-		this.position=position;
 		if(position==0){
 			supportInvalidateOptionsMenu();
 			 fragment = new SafeBusDashboardFragment(SafeBusMainActivity.this);
@@ -155,34 +153,18 @@ public class SafeBusMainActivity extends ActionBarActivity {
 	
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		boolean drawerOpen = drawerLayout.isDrawerOpen(navList);
-		if(position==2){
-			drawerOpen=true;
-		}
-		//menu.findItem(R.id.action_mas).setVisible(!drawerOpen);
+		menu.findItem(R.id.menu).setVisible(true);
 		return super.onPrepareOptionsMenu(menu);
 	}
 
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		
 		getMenuInflater().inflate(R.menu.menu_main, menu);
 		return true;
 	}
 
-
-	@Override
-	public void onBackPressed() {
-		if(position==2){
-			supportInvalidateOptionsMenu();
-			selectItem(0);
-		}else{
-			super.onBackPressed();
-		}
-		
-	}
-		
+	
 	
 	
 	
