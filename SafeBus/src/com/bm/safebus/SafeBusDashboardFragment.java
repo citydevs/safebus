@@ -114,21 +114,7 @@ public class SafeBusDashboardFragment extends Fragment implements OnClickListene
     
 
 
-		/*ActionBar*/
-	/*	ActionBar mActionBar = getActionBar();
-		mActionBar.setDisplayShowHomeEnabled(false);
-		mActionBar.setDisplayShowTitleEnabled(false);//new ColorDrawable(Color.WHITE)
-		mActionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.marco));
-		LayoutInflater mInflater = LayoutInflater.from(this);
-		View mCustomView = mInflater.inflate(R.layout.action_bar_custome, null);
-		mActionBar.setCustomView(mCustomView);
-		mActionBar.setDisplayShowCustomEnabled(true);
-		*/
-		
-		
-		
-		
-		//showDialogCalificaBus().show();
+	
 
 
 	@Override
@@ -241,7 +227,7 @@ public class SafeBusDashboardFragment extends Fragment implements OnClickListene
 	
 
 	
-	@Override
+	/*@Override
 	  public boolean onOptionsItemSelected(MenuItem item) {
 	    switch (item.getItemId()) {
 	    case R.id.menuadd:
@@ -255,7 +241,7 @@ public class SafeBusDashboardFragment extends Fragment implements OnClickListene
 	    	return false;
 	    }
 	  } 
-	
+	*/
 	
 	
 	

@@ -1,5 +1,6 @@
 package com.bm.safebus;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,6 +18,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bm.safebus.customes.CustomList;
+import com.bm.safebus.registro.ContactoActivity;
+import com.bm.savebus.utilerias.Utils;
+import com.mikesaurio.mensajesydialogos.Mensajes;
 
 
 
@@ -34,6 +39,9 @@ public class SafeBusMainActivity extends ActionBarActivity {
 
 	private ActionBarDrawerToggle drawerToggle;
 	private SafeBusDashboardFragment fragment;
+	
+	private Menu menu;
+	String[] info;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +60,7 @@ public class SafeBusMainActivity extends ActionBarActivity {
 		LayoutInflater mInflater = LayoutInflater.from(this);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		this.setTheme(R.style.AppTheme);
+		
 		
 		int titleId = getResources().getIdentifier("action_bar_title", "id", "android");
 		TextView abTitle = (TextView) findViewById(titleId);
@@ -105,10 +114,14 @@ public class SafeBusMainActivity extends ActionBarActivity {
 			return true;
 		}
 		 switch (item.getItemId()){
+		 case R.id.menuadd:
+		    	startActivity(new Intent(SafeBusMainActivity.this,ContactoActivity.class));
+		      return true;
+		    case R.id.menuabouth:
+		    	Mensajes.mostrarAercaDe(SafeBusMainActivity.this).show();
+		    	return true;
+		    }
 
-
-		 }
-		
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -144,9 +157,6 @@ public class SafeBusMainActivity extends ActionBarActivity {
 			drawerLayout.closeDrawer(navList);
 
 		}
-
-		
-		
 		
 	}
 	
@@ -160,12 +170,36 @@ public class SafeBusMainActivity extends ActionBarActivity {
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.menu_main, menu);
-		return true;
+		    MenuInflater inflater = getMenuInflater();
+		    inflater.inflate(R.menu.menu_main, menu);
+		  this.menu=menu;
+		  MenuItem bedMenuItem = menu.findItem(R.id.menuadd);
+		 	info= new Utils(SafeBusMainActivity.this).getPreferenciasContacto();
+		  		if(info[0]!=null){
+		  			 bedMenuItem.setTitle(getResources().getString(R.string.main_editar_contacto));
+		  				
+		  		} else {
+		  			 bedMenuItem.setTitle(getResources().getString(R.string.main_agregar_contacto));
+		  		}
+		    return true;
 	}
 
 	
-	
+	@Override
+	protected void onResume() {
+		if(menu!=null){
+		 MenuItem bedMenuItem = menu.findItem(R.id.menuadd);
+		 	info= new Utils(SafeBusMainActivity.this).getPreferenciasContacto();
+		  		if(info[0]!=null){
+		  			 bedMenuItem.setTitle(getResources().getString(R.string.main_editar_contacto));
+		  				
+		  		} else {
+		  			 bedMenuItem.setTitle(getResources().getString(R.string.main_agregar_contacto));
+		  		}
+	}
+		super.onResume();
+	}
+
 	
 	
 }
