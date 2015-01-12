@@ -1,15 +1,9 @@
 package com.bm.safebus;
 
-import java.io.IOException;
-
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -19,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.bm.safebus.customes.CustomList;
 
@@ -51,12 +46,16 @@ public class SafeBusMainActivity extends ActionBarActivity {
 		
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setHomeButtonEnabled(true);
-		getSupportActionBar().setDisplayShowHomeEnabled(true);
+		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		
 		getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.marco));
 		LayoutInflater mInflater = LayoutInflater.from(this);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		this.setTheme(R.style.AppTheme);
+		
+		int titleId = getResources().getIdentifier("action_bar_title", "id", "android");
+		TextView abTitle = (TextView) findViewById(titleId);
+		abTitle.setTextColor(getResources().getColor(R.color.color_safebus_rojo));
 		
 		
 		this.drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -69,7 +68,7 @@ public class SafeBusMainActivity extends ActionBarActivity {
 		navList.setAdapter(adapter);
 		navList.setOnItemClickListener(new DrawerItemClickListener());
 		
-		drawerToggle = new ActionBarDrawerToggle(this, drawerLayout,R.drawable.ic_launcher_menu, R.string.app_name,R.string.app_name) {
+		drawerToggle = new ActionBarDrawerToggle(this, drawerLayout,R.drawable.ic_launcher_logo, R.string.app_name,R.string.app_name) {
 			public void onDrawerClosed(View view) {
 				supportInvalidateOptionsMenu();
 			}
@@ -153,7 +152,8 @@ public class SafeBusMainActivity extends ActionBarActivity {
 	
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		menu.findItem(R.id.menu).setVisible(true);
+		boolean drawerOpen = drawerLayout.isDrawerOpen(navList);
+		menu.findItem(R.id.menu).setVisible(!drawerOpen);
 		return super.onPrepareOptionsMenu(menu);
 	}
 
