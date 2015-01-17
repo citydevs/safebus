@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="nav_options">
+        <item>Llamar a inmujeres</item>
+       <item>Llamar a la policia</item>
+        <item>Otra cosa</item>
+    </string-array>
+
+</resources>

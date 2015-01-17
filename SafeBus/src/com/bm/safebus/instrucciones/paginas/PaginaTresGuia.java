@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.provider.ContactsContract;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ public class PaginaTresGuia extends View  {
 	private View view;
 	private Activity context;
 	private TextView p2_tv_titulo,p2_tv_da_click;
+	private TextView instrucciones_pag_3_tv_tel_inmujeres;
 	
 	
 	public PaginaTresGuia(Activity context) {
@@ -59,20 +61,10 @@ public class PaginaTresGuia extends View  {
 		((TextView)view.findViewById(R.id.instrucciones_pag_3_tv_titulo)).setTypeface(new Fonts(context).getTypeFace(Fonts.FLAG_BLACK));
 		((TextView)view.findViewById(R.id.instrucciones_pag_3_tv_contenido)).setTypeface(new Fonts(context).getTypeFace(Fonts.FLAG_LIGHT));
 		
-		final TextView instrucciones_pag_3_tv_tel_inmujeres = (TextView)view.findViewById(R.id.instrucciones_pag_3_tv_tel_inmujeres);
+		instrucciones_pag_3_tv_tel_inmujeres = (TextView)view.findViewById(R.id.instrucciones_pag_3_tv_tel_inmujeres);
 		instrucciones_pag_3_tv_tel_inmujeres.setTypeface(new Fonts(context).getTypeFace(Fonts.FLAG_BLACK));
-		
-		instrucciones_pag_3_tv_tel_inmujeres.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Intent callIntent = new Intent(Intent.ACTION_CALL);
-				callIntent.setData(Uri.parse("tel:+"+instrucciones_pag_3_tv_tel_inmujeres.getText().toString().trim()));
-				context.startActivity(callIntent );
-			}
-		});
 	}
-
+	
 
 	/**
 	 * GET view

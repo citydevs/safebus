@@ -24,7 +24,7 @@ import com.bm.savebus.utilerias.Utils;
  */
 public class SplashActivity extends Activity {
 
-	private static final long SPLASH_SCREEN_DELAY = 3000; //tiempo que dura el splash
+	private static final long SPLASH_SCREEN_DELAY = 2000; //tiempo que dura el splash
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class SplashActivity extends Activity {
 		setContentView(R.layout.activity_splash);
 		FrameLayout frame_splash = (FrameLayout) findViewById(R.id.frame_splash);
 
-		Point p = Utils.getTamanoPantalla(SplashActivity.this); //tama�o de pantalla
+		Point p = Utils.getTamanoPantalla(SplashActivity.this); //tama���o de pantalla
 		
 		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(p.x / 2, p.y / 3);
 		lp.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
