@@ -2,9 +2,9 @@
 <resources>
 
     <string-array name="nav_options">
-        <item>My Medicines</item>
-       <item>My Citations</item>
-        <item>About me</item>
+        <item>Llamar a inmujeres</item>
+       <item>Llamar a la policia</item>
+        <item>Otra cosa</item>
     </string-array>
 
 </resources>
