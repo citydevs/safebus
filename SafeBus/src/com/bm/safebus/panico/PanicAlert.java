@@ -43,7 +43,6 @@ public class PanicAlert {
       */ 
 	public static  void sendSMS(String phoneNumber, String message)
      { 
-    	Log.d("************", message+"");
    try{
 		 SmsManager smsManager = SmsManager.getDefault();
        	 smsManager.sendTextMessage(phoneNumber, null, message, null, null);
