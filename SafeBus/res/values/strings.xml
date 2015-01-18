@@ -6,45 +6,44 @@
     <string name="hello_world">Hello world!</string>
     <string name="dialogo_btn_aceptar">Aceptar</string>
     <string name="paginas_instrucciones_titulo">Bienvenido</string>
-    <string name="paginas_instrucciones_texto_pag_1">Recuerda, si en algún momento te sientes inseguro o agredido, puedes apretar el botón de REPORTA y se mandará una notificación al chofer y a un contacto que elegirás a continuación</string>
-    <string name="instrucciones_contacto">Si en algún momento te sientes inseguro o agredido, puedes apretar el botón de REPORTA y se mandará una notificación al chofer y al contacto que elijas en este momento.</string>
-    <string name="mensaje_emergencia">Marcame en cuanto puedas a mi celular</string>
-    <string name="mensaje_emergencia_hint">Agrega mensaje de emergencia</string>
-    
-    
+    <string name="paginas_instrucciones_texto_pag_1">Recuerda, si en algún momento te sientes inseguro/a o agredido/a, puedes apretar el botón de REPORTA y se mandará una notificación al centro de mando y a un contacto que elegirás a continuación</string>
+    <string name="instrucciones_contacto">Si en algún momento te sientes inseguro o agredido, puedes apretar el botón de REPORTA y se mandará una notificación al centro de mando y al contacto que elijas en este momento.</string>
+    <string name="mensaje_emergencia">Márcame a mi celular en cuanto puedas, por favor.</string>
+    <string name="mensaje_emergencia_hint">Agrega un mensaje de emergencia</string>
+
+
     <!-- panico -->
-    <string name="ingresa_placa">Ingresa la placa del Bus</string>
+    <string name="ingresa_placa">Ingresa la placa del autobús</string>
     <string name="texto_placa">Placa</string>
      <string name="ruta_registro_vacio">Debes poner la placa</string>
 
     <!-- Mapa -->
-    <string name="mapa_espera">¡Espera! te estamos localizando</string>
+    <string name="mapa_espera">Un momento, te estamos localizando</string>
     <string name="mapa_mi_ubicacion">Mi ubicación</string>
 
     <!-- Pagina 2 -->
-    <string name="paginas_instrucciones_texto_pag_2_1">Da click en el botón “+” para AGREGAR un contacto para notificaciones.</string>
+    <string name="paginas_instrucciones_texto_pag_2_1">Da click en el botón “+” para AGREGAR un contacto que reciba tus notificaciones.</string>
     <string name="paginas_instrucciones_texto_pag_2_2">Si no quieres agregarlo ahora, podras hacerlo en cualquier momento despues.</string>
     <string name="paginas_instrucciones_texto_pag_2_1_listo">Da click en el botón “+” para EDITAR tu contacto de notificaciones.</string>
     <string name="paginas_instrucciones_texto_pag_2_2_listo">Para finalizar, da click en Entiendo.</string>
     <string name="paginas_instrucciones_texto_pag_2_3">Recuerda, siempre puedes ir a las configuraciones y agregar o editar tu contacto. </string>
     <string name="problemas_titulo">¿Quién está teniendo problemas?</string>
-    <string name="notificar_chofer_familia">Gracias por reportar, hemos mandado una notificación al chofer y a tu contacto de seguridad.</string>
-    <string name="notificar_chofer">Gracias por reportar, hemos mandado una notificación al chofer.</string>
-    <string name="notificar_acceso_wifi">Para acceder al WiFi del autobus, da like al grupo de SafeBus y te mandaremos la contraseña</string>
+    <string name="notificar_chofer_familia">Gracias por reportar, hemos notificado al centro de mando y a tu contacto de seguridad.</string>
+    <string name="notificar_chofer">Gracias por reportar, hemos notificado al centro de mando.</string>
+    <string name="notificar_acceso_wifi">Para acceder al WiFi del autobus, da like al grupo de SafeBus y te enviaremos la contraseña</string>
     <string name="gracias_por_compartir">
-En ese grupo podrás compartir mejor tu perspectiva sobre esta campaña y el servicio que se está dando en la línea de autobús. 
+En ese grupo podrás compartir mejor tu perspectiva sobre esta campaña y el servicio que se está dando en la línea de autobús.
  </string>
  <string name="gracias_por_compartir_banda">Para obtener la contraseña la próxima vez que hagas un viaje, te pediremos que califiques tu viaje una vez que bajes del autobús.</string>
     <string name="gracias_por_realimentacion">Gracias por dar retroalimentación en tu viaje anterior. En un momento enviaremos la contraseña del WiFi. </string>
     <string name="safebus_menu_encuentra">Encuentra</string>
     <string name="safebus_menu_reporta">Reporta</string>
     <string name="safebus_menu_conecta">Conecta</string>
-    
-    
+
+
     <!-- Pagina 3 -->
     <string name="paginas_instrucciones_titulo_3">Contra la violencia</string>
-    <string name="paginas_instrucciones_texto_pag_3">Recuerda que cuentas con el apoyo de InMujer en caso de que seas victima de algún delito sexual y/o cualquier tipo de VIOLENCIA DE GENERO en el transporte público o veas alguno\n ¡por favor reporta cualquier abuso!\n\nLlama al:</string>
-    <string name="tel_inmujeres">52009632</string>
+    <string name="paginas_instrucciones_texto_pag_3">Recuerda que cuentas con el apoyo de InMujer en caso de ver o ser víctima de algún delito sexual y/o cualquier tipo de VIOLENCIA DE GENERO en el transporte público\n ¡por favor reporta cualquier abuso!\n</string>
 
     <!-- Registro -->
     <string name="main_agregar_contacto">Agregar Contacto</string>
@@ -58,31 +57,31 @@ En ese grupo podrás compartir mejor tu perspectiva sobre esta campaña y el ser
     <string name="registro_et_correo">Correo</string>
     <string name="registro_selecciona_uno">Selecciona uno</string>
     <string name="registro_telefono_vacio">Debes llenar el teléfono correctamente</string>
-    <string name="registro_correo_vacio">El mensaje No puede estar vacio</string>
+    <string name="registro_correo_vacio">El mensaje NO puede estar vacio</string>
     <string name="registro_telefono_largo">El teléfono debe ser de 10 digitos</string>
     <string name="registro_telefono_incorrecto">El teléfono debe ser sólo de números</string>
-    <string name="registro_correo_incorrecto">El correo esta mal escrito</string>
+    <string name="registro_correo_incorrecto">El correo está mal escrito</string>
     <string name="title_activity_reporte">ReporteActivity</string>
     <string name="title_activity_enviar_alarma">EnviarAlarmaActivity</string>
     <string name="alarma_enviando">Enviando alarma.</string>
     <string name="back_salir">Presiona una vez más para salir</string>
 
-    
+
     <!-- conectar -->
     <string name="Pagina_liked">En un momento te enviaremos la contraseña</string>
-    
+
       <!-- Esperar -->
-    <string name="espere">espere, por favor ......</string>
-    
-    
+    <string name="espere">espera, por favor ......</string>
+
+
     <!-- Califica bus -->
     <string name="califica_bus_tv_titulo_calif">¿Qué te pareció el viaje en el bus?</string>
     <string name="califica_bus_btn_aceptar">Aceptar</string>
      <string name="califica_bus_et_comentario">Comentario</string>
-     <string name="Califica_taxi_0">Muy deficiente servicio</string>
-    <string name="Califica_taxi_05">Deficiente servicio</string>
-    <string name="Califica_taxi_10">Muy mal servicio</string>
-    <string name="Califica_taxi_15">Mal servicio</string>
+     <string name="Califica_taxi_0">Muy deficiente</string>
+    <string name="Califica_taxi_05">Deficiente</string>
+    <string name="Califica_taxi_10">Muy mal</string>
+    <string name="Califica_taxi_15">Mal</string>
     <string name="Califica_taxi_20">Servicio regular malo</string>
     <string name="Califica_taxi_25">Servicio regular</string>
     <string name="Califica_taxi_30">Servicio regular bueno</string>
@@ -90,6 +89,6 @@ En ese grupo podrás compartir mejor tu perspectiva sobre esta campaña y el ser
     <string name="Califica_taxi_40">Muy buen servicio</string>
     <string name="Califica_taxi_45">Excelente servicio</string>
     <string name="Califica_taxi_50">Servicio insuperable</string>
-    
-    
+
+
 </resources>
