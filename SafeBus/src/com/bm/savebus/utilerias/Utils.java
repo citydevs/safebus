@@ -73,6 +73,7 @@ public class Utils {
 		SharedPreferences prefs = activity.getSharedPreferences("PreferenciasSafeBus", Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = prefs.edit();
 		editor.putString("gcm", gcm);
+		editor.putString("placa", "1");
 		editor.commit();
 	}
 

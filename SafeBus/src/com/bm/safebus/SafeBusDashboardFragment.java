@@ -61,6 +61,7 @@ public class SafeBusDashboardFragment extends Fragment implements OnClickListene
 	private static final int ENVIAR_ALARMA_CHOFER=0;
 	private static final int ENVIAR_ALARMA_FAMILIAR_CHOFER=1;
 	String[] info;
+	private static int TIPO_SELECCION_ACCION = 0; 
 	
 	//dialogo
 	TextView dialogo_califica_tv_caracteres;
@@ -69,9 +70,9 @@ public class SafeBusDashboardFragment extends Fragment implements OnClickListene
 	
 	
 	//Dialogo de emergencia
-	private static final int ID_ADD = 1;
-    private static final int ID_ACCEPT = 2;
-    private static final int ID_UPLOAD = 3;
+	private static final int TOCO = 1;
+    private static final int MIRO = 2;
+    private static final int AGREDO = 3;
     QuickAction mQuickAction;
    
     
@@ -134,7 +135,9 @@ public class SafeBusDashboardFragment extends Fragment implements OnClickListene
 			break;
 
 		case R.id.safebus_btn_reporta:
-			if((new Utils(activity).getPreferenciasPlaca()[0])!=null){
+			showDialogQuienTieneProblemas().show();
+			
+		/*	if((new Utils(activity).getPreferenciasPlaca()[0])!=null){
 				long tiempo =Long.parseLong(new Utils(activity).getPreferenciasPlaca()[2]);
 				if((tiempo+7200000)>Utils.getFechaHoy()){
 					showDialogQuienTieneProblemas().show();
@@ -145,12 +148,13 @@ public class SafeBusDashboardFragment extends Fragment implements OnClickListene
 				
 			}else{
 				showDialogPlaca().show();
-			}
+			}*/
 			
 			break;
 
 		case R.id.safebus_btn_conecta:
-			if((new Utils(activity).getPreferenciasPlaca()[0])!=null){
+			iniciarActividad(FacebookLoginActivity.class);
+		/*	if((new Utils(activity).getPreferenciasPlaca()[0])!=null){
 				long tiempo =Long.parseLong(new Utils(activity).getPreferenciasPlaca()[2]);
 				if((tiempo+7200000)>Utils.getFechaHoy()){
 					iniciarActividad(FacebookLoginActivity.class);
@@ -165,15 +169,16 @@ public class SafeBusDashboardFragment extends Fragment implements OnClickListene
 			}else{
 				showDialogPlaca().show();
 			}
-			
+			*/
 			break;
 		case R.id.safebus_btn_alguien_mas:
 		
 			  mQuickAction.show(v);
-			//new MensajeTask(2).execute();
+			  TIPO_SELECCION_ACCION= 2;
 			break;
 		case R.id.safebus_btn_yo:
-		     mQuickAction.show(v);//new MensajeTask(1).execute();
+		     mQuickAction.show(v);
+		     TIPO_SELECCION_ACCION = 1;
 			break;
 		case R.id.enviar_alarma_btn_aceptar:
 			 customDialog.dismiss();
@@ -363,9 +368,9 @@ public class SafeBusDashboardFragment extends Fragment implements OnClickListene
 
 	public Dialog showDialogQuienTieneProblemas() {
 		
-		ActionItem addItem      = new ActionItem(ID_ADD, "Tocamiento", getResources().getDrawable(R.drawable.ic_launcher_tocamiento));
-        ActionItem acceptItem   = new ActionItem(ID_ACCEPT, "Miradas", getResources().getDrawable(R.drawable.ic_launcher_mirada));
-        ActionItem uploadItem   = new ActionItem(ID_UPLOAD, "Agreci��n", getResources().getDrawable(R.drawable.ic_launcher_agresion));
+		ActionItem addItem      = new ActionItem(TOCO, "Tocamiento", getResources().getDrawable(R.drawable.ic_launcher_tocamiento));
+        ActionItem acceptItem   = new ActionItem(MIRO, "Miradas", getResources().getDrawable(R.drawable.ic_launcher_mirada));
+        ActionItem uploadItem   = new ActionItem(AGREDO, "Agresión", getResources().getDrawable(R.drawable.ic_launcher_agresion));
         uploadItem.setSticky(true);
 
         mQuickAction  = new QuickAction(activity);
@@ -419,18 +424,21 @@ public class SafeBusDashboardFragment extends Fragment implements OnClickListene
 	            public void onItemClick(QuickAction quickAction, int pos, int actionId) {
 	                ActionItem actionItem = quickAction.getActionItem(pos);
 
-	                if (actionId == ID_ADD) {
-	                    Toast.makeText(activity, "Add item selected", Toast.LENGTH_SHORT).show();
-	                } else {
-	                    Toast.makeText(activity, actionItem.getTitle() + " selected", Toast.LENGTH_SHORT).show();
+	                if (actionId == TOCO) {
+	                	new MensajeTask(TIPO_SELECCION_ACCION).execute();
+	                } else if (actionId == MIRO){
+	                	new MensajeTask(TIPO_SELECCION_ACCION).execute();
+	                }else if (actionId == AGREDO){
+	                	new MensajeTask(TIPO_SELECCION_ACCION).execute();
 	                }
+	                customDialog.dismiss();
 	            }
 	        });
 
 	        mQuickAction.setOnDismissListener(new QuickAction.OnDismissListener() {
 	            @Override
 	            public void onDismiss() {
-	                Toast.makeText(activity, "Ups..dismissed", Toast.LENGTH_SHORT).show();
+	                //Toast.makeText(activity, "Ups..dismissed", Toast.LENGTH_SHORT).show();
 	            }
 	        });
 		
