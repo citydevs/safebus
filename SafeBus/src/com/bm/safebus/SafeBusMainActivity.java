@@ -19,7 +19,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bm.safebus.customes.CustomList;
+import com.bm.safebus.instrucciones.PaginadorInstrucciones;
 import com.bm.safebus.registro.ContactoActivity;
+import com.bm.safebus.splash.SplashActivity;
 import com.bm.savebus.utilerias.Utils;
 import com.mikesaurio.mensajesydialogos.Mensajes;
 
@@ -46,12 +48,15 @@ public class SafeBusMainActivity extends ActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		if (new Utils(SafeBusMainActivity.this).getPreferenciasGCM()==null) {//si ya registro
+			startActivity(new Intent().setClass(SafeBusMainActivity.this, SplashActivity.class));
+			this.finish();
+		} 
+			
 		super.onCreate(savedInstanceState);
-		
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		setContentView(R.layout.activity_dashboard);
-
 		
+		setContentView(R.layout.activity_dashboard);
 		
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setHomeButtonEnabled(true);
