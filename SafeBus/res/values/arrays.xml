@@ -4,7 +4,7 @@
     <string-array name="nav_options">
         <item>Llamar a inmujeres</item>
        <item>Llamar a la policia</item>
-        <item>Otra cosa</item>
+        <item>Llamar a CAS SSP</item>
     </string-array>
 
 </resources>

@@ -3,6 +3,7 @@ package com.bm.safebus;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentManager;
@@ -90,7 +91,7 @@ public class SafeBusMainActivity extends ActionBarActivity {
 		
 	
 		
-		selectItem(0);
+		selectItem(-1,null);
 
 	}
 
@@ -136,7 +137,14 @@ public class SafeBusMainActivity extends ActionBarActivity {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
-			selectItem(position);
+			if (position==0) {
+				selectItem(position,getString(R.string.tel_inmujeres));
+			}else if (position==1) {
+				selectItem(position,getString(R.string.tel_policia));
+			}else if (position==2) {
+				selectItem(position,getString(R.string.tel_casssp));
+			}
+			
 		}
 	}
 	
@@ -144,11 +152,11 @@ public class SafeBusMainActivity extends ActionBarActivity {
 	 * item de la lista seleccionado
 	 * @param position
 	 */
-	private void selectItem(int position) {
+	private void selectItem(int position, String tel) {
 		
-		if(position==0){
+		if(position==-1){
 			supportInvalidateOptionsMenu();
-			 fragment = new SafeBusDashboardFragment(SafeBusMainActivity.this);
+			fragment = new SafeBusDashboardFragment(SafeBusMainActivity.this);
 			Bundle args = new Bundle();
 			fragment.setArguments(args);
 			FragmentManager fragmentManager = getSupportFragmentManager();
@@ -156,6 +164,10 @@ public class SafeBusMainActivity extends ActionBarActivity {
 			navList.setItemChecked(position, true);
 			drawerLayout.closeDrawer(navList);
 
+		}else {
+			Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + tel));
+			startActivity(intent);
+			drawerLayout.closeDrawer(navList);
 		}
 		
 	}
