@@ -60,7 +60,7 @@ public class PaginadorInstrucciones extends FragmentActivity  implements OnListe
 	
 			
 		pager = (ViewPager)findViewById(R.id.pager_dialog);
-		pager.setOffscreenPageLimit(4);
+		pager.setOffscreenPageLimit(5);
 		
 		/*Creamos las paginas*/
 		FragmentPagerAdapterDialog adapter = new FragmentPagerAdapterDialog(getSupportFragmentManager());
@@ -103,6 +103,8 @@ public class PaginadorInstrucciones extends FragmentActivity  implements OnListe
 				PaginadorInstrucciones.this.pager.setCurrentItem(1);
 			}else if(PaginadorInstrucciones.this.pager.getCurrentItem()==1){
 				PaginadorInstrucciones.this.pager.setCurrentItem(2);
+			}else if(PaginadorInstrucciones.this.pager.getCurrentItem()==2){
+				PaginadorInstrucciones.this.pager.setCurrentItem(3);
 			}else{
 				//activar GSM 
 				 mGCM= new GCM(PaginadorInstrucciones.this);
@@ -126,9 +128,9 @@ public class PaginadorInstrucciones extends FragmentActivity  implements OnListe
 	@Override
 	public void onPageSelected(int index) {
 
-		if(index==0|| index == 1){
+		if(index==0|| index == 1|| index == 2){
 			btn_siguiente.setImageResource(R.drawable.boton_siguiente_selector);
-		}else if(index==2){
+		}else if(index==3){
 			btn_siguiente.setImageResource(R.drawable.boton_entiendo_selector);
 		}
 	}

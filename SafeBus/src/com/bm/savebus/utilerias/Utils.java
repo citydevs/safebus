@@ -54,9 +54,6 @@ public class Utils {
 
 	}
 
-	
-	
-
 	public void setPreferenciasContacto(String[] info) {
 
 		SharedPreferences prefs = activity.getSharedPreferences("PreferenciasSafeBus", Context.MODE_PRIVATE);
@@ -89,6 +86,19 @@ public class Utils {
 
 		SharedPreferences prefs = activity.getSharedPreferences("PreferenciasSafeBus", Context.MODE_PRIVATE);
 		return prefs.getString("gcm", null);
+	}
+	
+	public void setPreferenciasCAS(boolean CAS) {
+
+		SharedPreferences prefs = activity.getSharedPreferences("PreferenciasSafeBus", Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = prefs.edit();
+		editor.putBoolean("cas", CAS);
+		editor.commit();
+	}
+
+	public boolean getPreferenciasCAS() {
+		SharedPreferences prefs = activity.getSharedPreferences("PreferenciasSafeBus", Context.MODE_PRIVATE);
+		return prefs.getBoolean("cas", false);
 	}
 	
 	

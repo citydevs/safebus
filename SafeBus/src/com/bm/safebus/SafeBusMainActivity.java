@@ -9,6 +9,7 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -127,7 +128,17 @@ public class SafeBusMainActivity extends ActionBarActivity {
 		    case R.id.menuabouth:
 		    	Mensajes.mostrarAercaDe(SafeBusMainActivity.this).show();
 		    	return true;
+		    case R.id.casadd:
+		    	Utils util = new Utils(SafeBusMainActivity.this);
+		    	if(util.getPreferenciasCAS()){
+		    		util.setPreferenciasCAS(false);
+		    	}else{
+		    		util.setPreferenciasCAS(true);
+		    	}
+		    	 invalidateOptionsMenu();
+		    	return true;
 		    }
+		 
 
 		return super.onOptionsItemSelected(item);
 	}
@@ -188,17 +199,26 @@ public class SafeBusMainActivity extends ActionBarActivity {
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		    MenuInflater inflater = getMenuInflater();
-		    inflater.inflate(R.menu.menu_main, menu);
+		  MenuInflater inflater = getMenuInflater();
+		  inflater.inflate(R.menu.menu_main, menu);
 		  this.menu=menu;
+		  
 		  MenuItem bedMenuItem = menu.findItem(R.id.menuadd);
 		 	info= new Utils(SafeBusMainActivity.this).getPreferenciasContacto();
-		  		if(info[0]!=null){
-		  			 bedMenuItem.setTitle(getResources().getString(R.string.main_editar_contacto));
-		  				
-		  		} else {
-		  			 bedMenuItem.setTitle(getResources().getString(R.string.main_agregar_contacto));
-		  		}
+	  		if(info[0]!=null){
+	  			 bedMenuItem.setTitle(getResources().getString(R.string.main_editar_contacto));
+	  				
+	  		} else {
+	  			 bedMenuItem.setTitle(getResources().getString(R.string.main_agregar_contacto));
+	  		}
+	  		
+	  		 MenuItem bedMenuItemCas = menu.findItem(R.id.casadd);
+	  		 
+	  		if(new Utils(SafeBusMainActivity.this).getPreferenciasCAS()){
+	  			bedMenuItemCas.setTitle(getResources().getString(R.string.main_agregar_cas));
+	  		}else{
+	  			bedMenuItemCas.setTitle(getResources().getString(R.string.main_eliminar_cas));
+	  		}
 		    return true;
 	}
 
@@ -208,12 +228,21 @@ public class SafeBusMainActivity extends ActionBarActivity {
 		if(menu!=null){
 		 MenuItem bedMenuItem = menu.findItem(R.id.menuadd);
 		 	info= new Utils(SafeBusMainActivity.this).getPreferenciasContacto();
-		  		if(info[0]!=null){
-		  			 bedMenuItem.setTitle(getResources().getString(R.string.main_editar_contacto));
-		  				
-		  		} else {
-		  			 bedMenuItem.setTitle(getResources().getString(R.string.main_agregar_contacto));
-		  		}
+  		if(info[0]!=null){
+  			 bedMenuItem.setTitle(getResources().getString(R.string.main_editar_contacto));
+  				
+  		} else {
+  			 bedMenuItem.setTitle(getResources().getString(R.string.main_agregar_contacto));
+  		}
+  		
+  		MenuItem bedMenuItemCas = menu.findItem(R.id.casadd);
+  		
+  		if(new Utils(SafeBusMainActivity.this).getPreferenciasCAS()){
+  			bedMenuItemCas.setTitle(getResources().getString(R.string.main_agregar_cas));
+  		}else{
+  			bedMenuItemCas.setTitle(getResources().getString(R.string.main_eliminar_cas));
+  		}
+
 	}
 		super.onResume();
 	}

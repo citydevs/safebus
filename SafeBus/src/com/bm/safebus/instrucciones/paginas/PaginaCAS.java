@@ -12,7 +12,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.bm.safebus.R;
+import com.bm.safebus.SafeBusMainActivity;
 import com.bm.savebus.utilerias.Fonts;
+import com.bm.savebus.utilerias.Utils;
 
 /**
  * pagina que muestra en una lista los adeudos de un carro con las secretarias
@@ -64,31 +66,20 @@ public class PaginaCAS extends View {
 		
 		Switch  mySwitch = (Switch) view.findViewById(R.id.mySwitch);
 		  
-		  //set the switch to ON 
-		  mySwitch.setChecked(true);
-		  //attach a listener to check for changes in state
+
+		  mySwitch.setChecked(new Utils(context).getPreferenciasCAS());
+		 
+
 		  mySwitch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 		 
 		   @Override
 		   public void onCheckedChanged(CompoundButton buttonView,
 		     boolean isChecked) {
-		 
-		    if(isChecked){
-		     
-		    }else{
-		     
-		    }
-		 
+
+		    	new Utils(context).setPreferenciasCAS(isChecked);
+
 		   }
 		  });
-		   
-		  //check the current state before we display the screen
-		  if(mySwitch.isChecked()){
-		   //switchStatus.setText("Switch is currently ON");
-		  }
-		  else {
-		   //switchStatus.setText("Switch is currently OFF");
-		  }
 		 }
 		
 
