@@ -19,6 +19,15 @@
     <!-- Mapa -->
     <string name="mapa_espera">Un momento, te estamos localizando</string>
     <string name="mapa_mi_ubicacion">Mi ubicación</string>
+    
+    
+    
+    <!-- pag cas -->
+     <string name="paginas_instrucciones_titulo_cas">¿Contactar al CAS?</string>
+    <string name="paginas_instrucciones_texto_pag_cas">El CAS es el centro de Atención de la Secretaría de SSP. \n Ellos podrán dar atención y hacer una denuncia formal, en caso de que aplique.</string>
+    
+    
+    
 
     <!-- Pagina 2 -->
     <string name="paginas_instrucciones_texto_pag_2_1">Da click en el botón “+” para AGREGAR un contacto que reciba tus notificaciones.</string>
@@ -44,6 +53,8 @@
     <!-- Registro -->
     <string name="main_agregar_contacto">Agregar Contacto</string>
     <string name="main_editar_contacto">Editar Contacto</string>
+    <string name="main_agregar_cas">Contactar CAS</string>
+    <string name="main_eliminar_cas">No contactar CAS</string>
     <string name="main_menu_acerca_de">Acerca de</string>
     <string name="main_menu_menu">Menu</string>
     <string name="registro_titulo">Contacto de emergencia</string>

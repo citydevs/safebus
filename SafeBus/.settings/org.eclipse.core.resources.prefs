@@ -1,5 +1,3 @@
 eclipse.preferences.version=1
-encoding//src/com/bm/safebus/SafeBusDashboardFragment.java=UTF-8
-encoding//src/com/bm/safebus/SafeBusMainActivity.java=UTF-8
+encoding//src/com/bm/safebus/fragments/SafeBusDashboardFragment.java=UTF-8
 encoding//src/com/bm/safebus/instrucciones/PaginadorInstrucciones.java=UTF-8
-encoding//src/com/bm/safebus/splash/SplashActivity.java=UTF-8

@@ -6,10 +6,15 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.bm.safebus.R;
+import com.bm.safebus.SafeBusMainActivity;
 import com.bm.savebus.utilerias.Fonts;
+import com.bm.savebus.utilerias.Utils;
 
 /**
  * pagina que muestra en una lista los adeudos de un carro con las secretarias
@@ -18,7 +23,7 @@ import com.bm.savebus.utilerias.Fonts;
  *
  */
 @SuppressLint("ViewConstructor")
-public class PaginaUnoGuia extends View {
+public class PaginaCAS extends View {
 
 	
 	private View view;
@@ -26,19 +31,19 @@ public class PaginaUnoGuia extends View {
 
 	
 	
-	public PaginaUnoGuia(Activity context) {
+	public PaginaCAS(Activity context) {
 		super(context);
 		this.context = context;
 		init();
 	}
 
-	public PaginaUnoGuia(Activity context, AttributeSet attrs) {
+	public PaginaCAS(Activity context, AttributeSet attrs) {
 		super(context, attrs);
 		this.context = context;
 		init();
 	}
 
-	public PaginaUnoGuia(Activity context, AttributeSet attrs, int defStyleAttr) {
+	public PaginaCAS(Activity context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		this.context = context;
 		init();
@@ -54,15 +59,31 @@ public class PaginaUnoGuia extends View {
 
 		
 		LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		view = inflater.inflate(R.layout.instrucciones_pag_uno, null);
+		view = inflater.inflate(R.layout.instrucciones_pag_cas, null);
 		
 		((TextView)view.findViewById(R.id.instrucciones_pag_1_tv_titulo)).setTypeface(new Fonts(context).getTypeFace(Fonts.FLAG_BLACK));
 		((TextView)view.findViewById(R.id.instrucciones_pag_1_tv_contenido)).setTypeface(new Fonts(context).getTypeFace(Fonts.FLAG_LIGHT));
 		
-	
+		Switch  mySwitch = (Switch) view.findViewById(R.id.mySwitch);
+		  
+
+		  mySwitch.setChecked(new Utils(context).getPreferenciasCAS());
+		 
+
+		  mySwitch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+		 
+		   @Override
+		   public void onCheckedChanged(CompoundButton buttonView,
+		     boolean isChecked) {
+
+		    	new Utils(context).setPreferenciasCAS(isChecked);
+
+		   }
+		  });
+		 }
 		
 
-	}
+	
 
 
 	/**
