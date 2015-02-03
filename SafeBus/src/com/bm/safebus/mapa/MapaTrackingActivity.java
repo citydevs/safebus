@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -28,6 +29,7 @@ import android.widget.TextView;
 import com.bm.safebus.R;
 import com.bm.safebus.SafeBusMainActivity;
 import com.bm.safebus.mapa.bean.MapaBean;
+import com.bm.safebus.mapa.bean.PuntosEstacionesBean;
 import com.bm.safebus.registro.ContactoActivity;
 import com.bm.savebus.utilerias.Utils;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -52,12 +54,13 @@ public class MapaTrackingActivity extends Activity {
 	    private GoogleMap map;
 	  	private ProgressDialog pDialog;
 	//	private MarkerOptions marker_;
-		private ArrayList<MapaBean>	mapaBeanArray= new ArrayList<MapaBean>();
+	//	private ArrayList<MapaBean>	mapaBeanArray= new ArrayList<MapaBean>();
 		private boolean isFirstTime=true;
 		private Menu menu;
 		private String id_ubicacion= null;
 		private ArrayList<String> pointsLat;
 		private ArrayList<String> pointsLon;
+		private ArrayList<PuntosEstacionesBean> arrayPuntos;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +112,12 @@ public class MapaTrackingActivity extends Activity {
 			}
 		});
 
-		
+		try {
+			arrayPuntos =	new Utils(MapaTrackingActivity.this).parseXML();
+			//Log.d("***************", arrayPuntos.size()+"");
+		} catch (XmlPullParserException e) {
+			e.printStackTrace();
+		}	
 		 	
 	}
 	
@@ -146,7 +154,7 @@ public class MapaTrackingActivity extends Activity {
 	
 	public void actualizarMapa(LatLng latLng){
 		if(Utils.hasInternet(MapaTrackingActivity.this)){
-			buscarBuses();
+		//	buscarBuses();
 			
 			map.clear();
 			MarkerOptions	marker_ = new MarkerOptions().position(latLng).title(getString(R.string.mapa_mi_ubicacion));
@@ -168,16 +176,26 @@ public class MapaTrackingActivity extends Activity {
 			
 			
 			
-			MarkerOptions[] markers= new MarkerOptions[mapaBeanArray.size()];
+		/*	MarkerOptions[] markers= new MarkerOptions[mapaBeanArray.size()];
 			
 			for(int i=0;i<mapaBeanArray.size();i++){
 				markers[i]=new MarkerOptions().position(mapaBeanArray.get(i).getPunto()).title(mapaBeanArray.get(i).getPlaca()+"@@"+mapaBeanArray.get(i).getRuta_id());
 				markers[i].icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_launcher_bus_mapa));
 				map.addMarker(markers[i]);
 			}
+			*/
 			
+			MarkerOptions[] markers= new MarkerOptions[arrayPuntos.size()];
+			for(int i=0;i<arrayPuntos.size();i++){
+				//Log.d("*****LAt",Double.parseDouble(arrayPuntos.get(i).getLatitud())+"");
+				//Log.d("*****LOn", Double.parseDouble(arrayPuntos.get(i).getLongitud())+"");
+				LatLng ll = new LatLng(Double.parseDouble(arrayPuntos.get(i).getLatitud()), Double.parseDouble(arrayPuntos.get(i).getLongitud()));
+				markers[i]=new MarkerOptions().position(ll);
+				markers[i].icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_launcher_bus_mapa));
+				map.addMarker(markers[i]);
+			}
 			
-			map.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
+			/*map.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
 				@Override
 				public void onInfoWindowClick(Marker marker) {}});
 	
@@ -212,7 +230,7 @@ public class MapaTrackingActivity extends Activity {
 	            public View getInfoContents(Marker marker) {
 	            	return null; 
 	            }
-	        });
+	        });*/
 			
 			
 			
@@ -229,7 +247,7 @@ public class MapaTrackingActivity extends Activity {
 	
 	
 	
-	private void buscarBuses() {
+/*	private void buscarBuses() {
 		mapaBeanArray.clear();
 		
 		String url= "http://cryptic-peak-2139.herokuapp.com/buses.json";
@@ -269,9 +287,11 @@ public class MapaTrackingActivity extends Activity {
 			e.printStackTrace();
 		}
 		
-	}
+	}*/
 
 
+	
+	
 	/**
 	 * revisa si el mapa esta 
 	 * @return (boolean) true si el mapa esta listo 

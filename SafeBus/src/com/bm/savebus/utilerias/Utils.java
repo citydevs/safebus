@@ -1,7 +1,12 @@
 package com.bm.savebus.utilerias;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import org.apache.http.HttpEntity;
@@ -21,6 +26,9 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -31,11 +39,11 @@ import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.StrictMode;
-import android.util.Log;
 import android.view.Display;
 
 import com.bm.safebus.R;
 import com.bm.safebus.gcm.UserInfo;
+import com.bm.safebus.mapa.bean.PuntosEstacionesBean;
 
 public class Utils {
 
@@ -284,5 +292,99 @@ public class Utils {
 				return 0;
 			}
 		}
+		/**
+	     * Retrieve navigation data set from either remote URL or String
+	     * @param url
+	     * @return navigation set
+		 * @throws XmlPullParserException 
+	     */
+	    public  ArrayList<PuntosEstacionesBean>  parseXML() throws XmlPullParserException {
+	    	PuntosEstacionesBean puntos;
+	    	ArrayList<PuntosEstacionesBean> arrayPuntos = new ArrayList<PuntosEstacionesBean>();
+	    	 XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+	         factory.setNamespaceAware(true);
+	         XmlPullParser xpp = factory.newPullParser();
+
+	         xpp.setInput(new StringReader (loadAssetTextAsString("doc.kml")));
+	         int eventType = xpp.getEventType();
+	         boolean flag = false;
+	         boolean flag_point = false;
+	         while (eventType != XmlPullParser.END_DOCUMENT) {
+	          if(eventType == XmlPullParser.START_DOCUMENT) {
+	            //  System.out.println("Start document");
+	          } else if(eventType == XmlPullParser.END_DOCUMENT) {
+	             // System.out.println("End document");
+	          } else if(eventType == XmlPullParser.START_TAG) {
+	        	  
+	        	  if(xpp.getName().equals("Point")){
+	        		  flag_point = true;
+	        	  } 
+	        	  if(xpp.getName().equals("coordinates") && flag_point){
+	        		  	flag = true;
+	        	  }
+	           
+	          } else if(eventType == XmlPullParser.END_TAG) {
+	        	  if(xpp.getName().equals("Point")){
+	        		  flag_point = false;
+	        	  } 
+	        	  if(xpp.getName().equals("coordinates")){
+	        		  	flag = false;
+	        	  }
+	          } else if(eventType == XmlPullParser.TEXT) {
+	        	  if(flag){
+	        		  puntos = new PuntosEstacionesBean();
+	        		  String[] p = xpp.getText().split(",");
+	        		  puntos.setLongitud(p[0]);
+	        		  puntos.setLatitud(p[1]);
+	        		  puntos.setAltitud(p[2]);
+	        		  flag = false;
+	        		  arrayPuntos.add(puntos);
+	        	  } 
+	          }
+	          try {
+				eventType = xpp.next();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	         }
+			return arrayPuntos;
+	    }
+	    
+	    /**
+	     * De assets a String
+	     * @param name
+	     * @return
+	     */
+	    private String loadAssetTextAsString(String name) {
+	        BufferedReader in = null;
+	        try {
+	            StringBuilder buf = new StringBuilder();
+	            InputStream is = activity.getAssets().open(name);
+	            in = new BufferedReader(new InputStreamReader(is));
+
+	            String str;
+	            boolean isFirst = true;
+	            while ( (str = in.readLine()) != null ) {
+	                if (isFirst)
+	                    isFirst = false;
+	                else
+	                    buf.append('\n');
+	                buf.append(str);
+	            }
+	            return buf.toString();
+	        } catch (IOException e) {
+	        } finally {
+	            if (in != null) {
+	                try {
+	                    in.close();
+	                } catch (IOException e) {
+	                }
+	            }
+	        }
+
+	        return null;
+	    }
+
+	
 		
 }
