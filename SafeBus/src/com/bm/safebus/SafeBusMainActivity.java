@@ -1,9 +1,5 @@
 package com.bm.safebus;
 
-import java.util.ArrayList;
-
-import org.xmlpull.v1.XmlPullParserException;
-
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
@@ -13,7 +9,6 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,11 +19,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bm.safebus.customes.CustomList;
-import com.bm.safebus.mapa.bean.PuntosEstacionesBean;
+import com.bm.safebus.fragments.SafeBusDashboardFragment;
 import com.bm.safebus.registro.ContactoActivity;
 import com.bm.safebus.splash.SplashActivity;
 import com.bm.savebus.utilerias.Utils;
-import com.facebook.android.Util;
 import com.mikesaurio.mensajesydialogos.Mensajes;
 
 

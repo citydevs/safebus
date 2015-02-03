@@ -1,7 +1,13 @@
-package com.bm.safebus;
+package com.bm.safebus.pupop;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.bm.safebus.R;
+import com.bm.safebus.R.anim;
+import com.bm.safebus.R.id;
+import com.bm.safebus.R.layout;
+import com.bm.safebus.R.style;
 
 import android.content.Context;
 import android.graphics.Rect;

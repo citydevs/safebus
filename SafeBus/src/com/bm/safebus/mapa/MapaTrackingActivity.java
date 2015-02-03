@@ -114,7 +114,6 @@ public class MapaTrackingActivity extends Activity {
 
 		try {
 			arrayPuntos =	new Utils(MapaTrackingActivity.this).parseXML();
-			//Log.d("***************", arrayPuntos.size()+"");
 		} catch (XmlPullParserException e) {
 			e.printStackTrace();
 		}	

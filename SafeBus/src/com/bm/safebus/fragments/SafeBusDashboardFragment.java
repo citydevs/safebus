@@ -1,4 +1,4 @@
-package com.bm.safebus;
+package com.bm.safebus.fragments;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -28,10 +28,17 @@ import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bm.safebus.R;
+import com.bm.safebus.R.drawable;
+import com.bm.safebus.R.id;
+import com.bm.safebus.R.layout;
+import com.bm.safebus.R.string;
 import com.bm.safebus.facebook.FacebookLoginActivity;
 import com.bm.safebus.gcm.UserInfo;
 import com.bm.safebus.mapa.MapaTrackingActivity;
 import com.bm.safebus.panico.PanicAlert;
+import com.bm.safebus.pupop.ActionItem;
+import com.bm.safebus.pupop.QuickAction;
 import com.bm.safebus.registro.ContactoActivity;
 import com.bm.savebus.utilerias.Utils;
 import com.mikesaurio.mensajesydialogos.Mensajes;
@@ -431,7 +438,8 @@ public class SafeBusDashboardFragment extends Fragment implements OnClickListene
 	                }else if (actionId == AGREDO){
 	                	new MensajeTask(TIPO_SELECCION_ACCION).execute();
 	                }
-	                customDialog.dismiss();
+	                mQuickAction.dismiss();
+	                //customDialog.dismiss();
 	            }
 	        });
 
