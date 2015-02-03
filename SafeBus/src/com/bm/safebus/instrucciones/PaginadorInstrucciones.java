@@ -65,6 +65,7 @@ public class PaginadorInstrucciones extends FragmentActivity  implements OnListe
 		/*Creamos las paginas*/
 		FragmentPagerAdapterDialog adapter = new FragmentPagerAdapterDialog(getSupportFragmentManager());
 		adapter.addFragment(ScreenSlidePageFragmentDialog.newInstance(getResources().getColor(R.color.android_blue), 1,PaginadorInstrucciones.this));
+		adapter.addFragment(ScreenSlidePageFragmentDialog.newInstance(getResources().getColor(R.color.android_red), 4,PaginadorInstrucciones.this));
 		adapter.addFragment(ScreenSlidePageFragmentDialog.newInstance(getResources().getColor(R.color.android_red), 2,PaginadorInstrucciones.this));
 		adapter.addFragment(ScreenSlidePageFragmentDialog.newInstance(getResources().getColor(R.color.android_red), 3,PaginadorInstrucciones.this));
 		
