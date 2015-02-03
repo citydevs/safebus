@@ -33,6 +33,7 @@ import com.bm.safebus.R.drawable;
 import com.bm.safebus.R.id;
 import com.bm.safebus.R.layout;
 import com.bm.safebus.R.string;
+import com.bm.safebus.SafeBusMainActivity;
 import com.bm.safebus.facebook.FacebookLoginActivity;
 import com.bm.safebus.gcm.UserInfo;
 import com.bm.safebus.mapa.MapaTrackingActivity;
@@ -220,12 +221,16 @@ public class SafeBusDashboardFragment extends Fragment implements OnClickListene
 	public void enviarAlarma(int tipo) {
 	switch (tipo) {
 	case ENVIAR_ALARMA_CHOFER:
-		
+		if(new Utils(activity).getPreferenciasCAS()){
+			PanicAlert.contactaAlCAS();
+		}
 		break;
 	case ENVIAR_ALARMA_FAMILIAR_CHOFER:
 		
 		PanicAlert.sendSMS(info[0], getString(R.string.mensaje_emergencia));
-
+		if(new Utils(activity).getPreferenciasCAS()){
+			PanicAlert.contactaAlCAS();
+		}
 		break;
 
 	default:
