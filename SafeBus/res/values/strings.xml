@@ -10,6 +10,7 @@
     <string name="instrucciones_contacto">Si en algún momento te sientes inseguro o agredido, puedes apretar el botón de REPORTA y se mandará una notificación al centro de mando y al contacto que elijas en este momento.</string>
     <string name="mensaje_emergencia">Márcame a mi celular en cuanto puedas, por favor.</string>
     <string name="mensaje_emergencia_hint">Agrega un mensaje de emergencia</string>
+    <string name="eliminar_contacto">Eliminar contacto</string>
 
     <!-- panico -->
     <string name="ingresa_placa">Ingresa la placa del autobús</string>

@@ -36,7 +36,7 @@ public class ContactoActivity extends Activity  {
 	private ArrayList<String> listaCels;
 	private EditTextBackEvent et_telefono,et_mensaje_emergencia;
 	AlertDialog customDialog= null;
-	private Button btn_guardar;
+	private Button btn_guardar,btn_eliminar_contacto;
 	private ImageView ImageView_titulo_contacto;
 
 	
@@ -78,6 +78,20 @@ public class ContactoActivity extends Activity  {
 				startActivityForResult(intent, 0);
 			}
 		});
+		
+		btn_eliminar_contacto=(Button)findViewById(R.id.btn_eliminar_contacto);
+		btn_eliminar_contacto.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				new Utils(ContactoActivity.this).setPreferenciasContacto(new String[]{null,null});
+				Intent returnIntent = new Intent();
+				setResult(PaginadorInstrucciones.CONTACTO_GUARDADO, returnIntent);
+				finish();
+			}
+		});
+		
+		
 		
 		
 		String[] info= new Utils(ContactoActivity.this).getPreferenciasContacto();

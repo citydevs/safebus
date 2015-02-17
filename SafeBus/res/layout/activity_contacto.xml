@@ -56,10 +56,10 @@
                         android:layout_marginTop="5dp"
                         android:layout_weight=".9"
                         android:background="@drawable/selector_edittext"
+                        android:digits="0123456789"
                         android:drawableLeft="@drawable/ic_launcher_cel"
                         android:ems="10"
                         android:focusable="true"
-						android:digits="0123456789"
                         android:focusableInTouchMode="true"
                         android:hint="@string/registro_et_telefono"
                         android:inputType="phone"
@@ -87,9 +87,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/marco"
                 android:orientation="horizontal"
-                android:layout_marginTop="10dp"
                 android:padding="5dp" >
 
                 <com.bm.safebus.registro.EditTextBackEvent
@@ -101,12 +101,12 @@
                     android:ems="10"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
+                    android:hint="@string/mensaje_emergencia_hint"
                     android:inputType="textMultiLine"
                     android:lines="4"
                     android:maxLength="80"
                     android:padding="5dp"
                     android:singleLine="false"
-                    android:hint="@string/mensaje_emergencia_hint"
                     android:text="@string/mensaje_emergencia" />
             </LinearLayout>
 
@@ -116,6 +116,17 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="@string/instrucciones_contacto" />
+
+            <Button
+                android:id="@+id/btn_eliminar_contacto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_btn_square"
+                android:padding="5dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="@string/eliminar_contacto"
+                android:textColor="@drawable/selector_tv_color_btn" />
         </LinearLayout>
     </ScrollView>
 

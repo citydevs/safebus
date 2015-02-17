@@ -381,8 +381,10 @@ public class SafeBusDashboardFragment extends Fragment implements OnClickListene
 	public Dialog showDialogQuienTieneProblemas() {
 		
 		ActionItem addItem      = new ActionItem(TOCO, "Tocamiento", getResources().getDrawable(R.drawable.ic_launcher_tocamiento));
-        ActionItem acceptItem   = new ActionItem(MIRO, "Miradas", getResources().getDrawable(R.drawable.ic_launcher_mirada));
+        ActionItem acceptItem   = new ActionItem(MIRO, "Miramiento", getResources().getDrawable(R.drawable.ic_launcher_mirada));
         ActionItem uploadItem   = new ActionItem(AGREDO, "Agresión", getResources().getDrawable(R.drawable.ic_launcher_agresion));
+        ActionItem exhibicionismotItem   = new ActionItem(MIRO, "Exhibicionísmo", getResources().getDrawable(R.drawable.ic_launcher_exhibicionismo));
+        ActionItem otroItem   = new ActionItem(AGREDO, "Otro", getResources().getDrawable(R.drawable.ic_launcher_otro));
         uploadItem.setSticky(true);
 
         mQuickAction  = new QuickAction(activity);
@@ -390,6 +392,8 @@ public class SafeBusDashboardFragment extends Fragment implements OnClickListene
         mQuickAction.addActionItem(addItem);
         mQuickAction.addActionItem(acceptItem);
         mQuickAction.addActionItem(uploadItem);
+        mQuickAction.addActionItem(exhibicionismotItem);
+        mQuickAction.addActionItem(otroItem);
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		View view = activity.getLayoutInflater()	.inflate(R.layout.activity_reporte, null);
