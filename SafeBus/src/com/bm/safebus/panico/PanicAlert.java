@@ -60,13 +60,6 @@ public class PanicAlert {
 		
 	}
 	
-	/**
-	 * Si es por sms o correo
-	 */
-	public static void contactaAlMando() {
-		
-		
-	}
 
     
 }
