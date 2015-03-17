@@ -224,12 +224,17 @@ public class SafeBusDashboardFragment extends Fragment implements OnClickListene
 		if(new Utils(activity).getPreferenciasCAS()){
 			PanicAlert.contactaAlCAS();
 		}
+		if(new Utils(activity).getPreferenciasMando()){
+			PanicAlert.contactaAlMando();
+		}
 		break;
 	case ENVIAR_ALARMA_FAMILIAR_CHOFER:
-		
 		PanicAlert.sendSMS(info[0], getString(R.string.mensaje_emergencia));
 		if(new Utils(activity).getPreferenciasCAS()){
 			PanicAlert.contactaAlCAS();
+		}
+		if(new Utils(activity).getPreferenciasMando()){
+			PanicAlert.contactaAlMando();
 		}
 		break;
 

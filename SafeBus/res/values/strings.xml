@@ -26,6 +26,10 @@
     <!-- pag cas -->
      <string name="paginas_instrucciones_titulo_cas">¿Contactar al CAS?</string>
     <string name="paginas_instrucciones_texto_pag_cas">El CAS es el centro de Atención de la Secretaría de SSP. \n Ellos podrán dar atención y hacer una denuncia formal, en caso de que aplique.</string>
+
+        <!-- pag mando -->
+     <string name="paginas_instrucciones_titulo_mando">¿Contactar al Centro De Mando?</string>
+    <string name="paginas_instrucciones_texto_pag_mando">El Centro de Mando controla a todos los autobuses dentro de este programa \n Ellos pueden contactar a la policia, encender las camaras y contactar al chofer para dar instrucciones de que hacer.</string>
     
     
     

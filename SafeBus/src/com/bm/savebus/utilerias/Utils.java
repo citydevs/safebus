@@ -102,6 +102,20 @@ public class Utils {
 	}
 	
 	
+	public void setPreferenciasMando(boolean mando) {
+
+		SharedPreferences prefs = activity.getSharedPreferences("PreferenciasSafeBus", Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = prefs.edit();
+		editor.putBoolean("mando", mando);
+		editor.commit();
+	}
+
+	public boolean getPreferenciasMando() {
+		SharedPreferences prefs = activity.getSharedPreferences("PreferenciasSafeBus", Context.MODE_PRIVATE);
+		return prefs.getBoolean("mando", false);
+	}
+	
+	
 	public void setPreferenciasPlaca(String placa,String calificacion) {
 
 		SharedPreferences prefs = activity.getSharedPreferences("PreferenciasSafeBus", Context.MODE_PRIVATE);

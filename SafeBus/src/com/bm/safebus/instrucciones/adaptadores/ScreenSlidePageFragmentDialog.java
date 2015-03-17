@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bm.safebus.R;
 import com.bm.safebus.instrucciones.paginas.PaginaCAS;
 import com.bm.safebus.instrucciones.paginas.PaginaDosGuia;
+import com.bm.safebus.instrucciones.paginas.PaginaMando;
 import com.bm.safebus.instrucciones.paginas.PaginaTresGuia;
 import com.bm.safebus.instrucciones.paginas.PaginaUnoGuia;
 
@@ -90,6 +91,10 @@ public class ScreenSlidePageFragmentDialog extends Fragment   {
 			PaginaCAS paginaCAS=new PaginaCAS(actividad);
 			paginaCAS.init();
 			return paginaCAS.getView();
+		}else if(index==5){
+			PaginaMando paginaMando=new PaginaMando(actividad);
+			paginaMando.init();
+			return paginaMando.getView();
 		}
 		else{
 			ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_screen_slide_page, container, false);
