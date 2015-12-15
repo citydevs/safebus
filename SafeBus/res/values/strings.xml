@@ -6,7 +6,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="dialogo_btn_aceptar">Aceptar</string>
     <string name="paginas_instrucciones_titulo">Bienvenido</string>
-    <string name="paginas_instrucciones_texto_pag_1">Recuerda, si en algún momento te sientes inseguro/a o agredido/a, puedes apretar el botón de REPORTA y se mandará una notificación al centro de mando y a un contacto que elegirás a continuación</string>
+    <string name="paginas_instrucciones_texto_pag_1">Recuerda, si en algún momento te sientes inseguro/insegura o agredido/agredida, puedes apretar el botón de REPORTA y se mandará una notificación al centro de mando y a un contacto que elegirás a continuación</string>
     <string name="instrucciones_contacto">Si en algún momento te sientes inseguro o agredido, puedes apretar el botón de REPORTA y se mandará una notificación al centro de mando y al contacto que elijas en este momento.</string>
     <string name="mensaje_emergencia">Márcame a mi celular en cuanto puedas, por favor.</string>
     <string name="mensaje_emergencia_hint">Agrega un mensaje de emergencia</string>
@@ -24,8 +24,8 @@
     
     
     <!-- pag cas -->
-     <string name="paginas_instrucciones_titulo_cas">¿Contactar al CAS?</string>
-    <string name="paginas_instrucciones_texto_pag_cas">El CAS es el centro de Atención de la Secretaría de SSP. \n Ellos podrán dar atención y hacer una denuncia formal, en caso de que aplique.</string>
+     <string name="paginas_instrucciones_titulo_cas">¿Contactar a la UCS?</string>
+    <string name="paginas_instrucciones_texto_pag_cas">La UCS es la Unidad de Contacto del Secretario de Seguridad Pública. \n Ellos podrán dar atención y hacer una denuncia formal, en caso de que aplique.</string>
 
         <!-- pag mando -->
      <string name="paginas_instrucciones_titulo_mando">¿Contactar al Centro De Mando?</string>
